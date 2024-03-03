@@ -25,7 +25,6 @@ export default defineConfig({
               // pass from the structure callback params above
               //@ts-expect-error
               S,
-              //@ts-expect-error
               context,
             }),
           ]);

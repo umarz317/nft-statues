@@ -8,7 +8,7 @@ export default function StudioPage() {
   return (
     <>
       <Head>
-        <title>SOHub CMS</title>
+        <title>Statues CMS</title>
         {Object.entries(metadata).map(([key, value]) => (
           <meta key={key} name={key} content={value} />
         ))}

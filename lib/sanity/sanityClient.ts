@@ -1,6 +1,5 @@
 import { createClient } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
-import { getFileAsset } from "@sanity/asset-utils";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID; // "pv8y60vp"
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"; // "production"
@@ -25,5 +24,3 @@ const config = {
 export function urlFor(source: any) {
   return builder.image(source);
 }
-
-export const assetUrlFor = (source: any) => getFileAsset(source, config);

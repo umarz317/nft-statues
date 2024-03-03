@@ -4,9 +4,9 @@ import {
   orderRankOrdering,
 } from "@sanity/orderable-document-list";
 
-export const sample = defineType({
-  name: "sample",
-  title: "Sample",
+export const statue = defineType({
+  name: "statue",
+  title: "Statue",
   type: "document",
   orderings: [orderRankOrdering],
   fields: [
@@ -15,15 +15,32 @@ export const sample = defineType({
       title: "Title",
       type: "string",
     }),
-    orderRankField({ type: "sample" }),
+    //@ts-expect-error
+    orderRankField({ type: "statue" }),
     defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
+      name: "price",
+      title: "Price",
+      type: "number",
+    }),
+    defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+    }),
+    defineField({
+      name: "height",
+      title: "Height",
+      type: "number",
+    }),
+    defineField({
+      name: "material",
+      title: "Material",
+      type: "string",
+    }),
+    defineField({
+      name: "weight",
+      title: "Weight",
+      type: "number",
     }),
   ],
 });

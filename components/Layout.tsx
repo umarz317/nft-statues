@@ -1,3 +1,15 @@
+import { useRouter } from "next/router";
+import Nav from "./Navigation/Nav";
+import MintItemDrawer from "./Home/MintSection/MintItemDrawer";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <div className="layout-wrapper">{children}</div>;
+  const router = useRouter();
+  const isSanity = router.pathname.includes("sanity");
+  return (
+    <div className="layout-wrapper">
+      <MintItemDrawer />
+      {!isSanity && <Nav />}
+      {children}
+    </div>
+  );
 }

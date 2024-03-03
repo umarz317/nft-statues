@@ -1,6 +1,7 @@
 import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
 import { gsap } from "@/lib/gsap";
+import { useEffect } from "react";
 
 function DetailItem({ title, value }: { title: string; value: string }) {
   return (
@@ -19,28 +20,28 @@ export default function MintItemDrawer() {
   const { title, height, price, material, weight, isOpen, setOpen } =
     useMintItemDrawer();
 
-  useIsomorphicLayoutEffect(() => {
+  useEffect(() => {
     const html = document.querySelector("html");
     const drawer = document.querySelector(`.mint-drawer-wrapper`);
     const bg = document.querySelector(`.mint-drawer-bg`);
-    const drawerRight = document.querySelector(`.mint-drawer-right`);
+    const drawerRight = document.querySelector(
+      `.mint-drawer-right`
+    ) as HTMLElement;
 
     const tl = gsap.timeline();
 
     if (isOpen) {
       html?.classList.add("overflow-hidden");
-      drawer?.classList.remove("hidden");
 
       tl.to(bg, { opacity: 1 });
-      tl.to(".mint-drawer-right", { translateX: "0%" }, 0);
+      tl.to(drawerRight, { x: "0%" }, 0);
     } else {
       html?.classList.remove("overflow-hidden");
-      tl.to(".mint-drawer-right", { translateX: "100%" });
+      tl.to(drawerRight, { x: "100%" });
       tl.to(
         bg,
         {
           opacity: 0,
-          onComplete: () => drawer?.classList.add("hidden"),
         },
         0
       );
@@ -52,7 +53,12 @@ export default function MintItemDrawer() {
   }, [isOpen]);
 
   return (
-    <div className="fixed left-0 top-0 z-[1000] w-full h-full hidden mint-drawer-wrapper">
+    <div
+      style={{
+        pointerEvents: isOpen ? "all" : "none",
+      }}
+      className="fixed left-0 top-0 z-[1000] w-full h-full mint-drawer-wrapper"
+    >
       <div className="mint-drawer-right translate-x-[100%] absolute z-10 h-full w-[40%] right-0 top-0 p-8">
         <div className="mint-drawer-content w-full h-full bg-white rounded-3xl flex flex-col justify-between p-16">
           <span className="mt-16 block text-black text-7xl font-medium tracking-tighter">
@@ -84,7 +90,7 @@ export default function MintItemDrawer() {
       </div>
       <div
         onClick={() => setOpen(false)}
-        className="absolute inset-0 bg-black/30 backdrop-blur-2xl opacity-0 mint-drawer-bg z-0"
+        className="absolute  inset-0 bg-black/30 backdrop-blur-2xl opacity-0 mint-drawer-bg z-0"
       />
     </div>
   );

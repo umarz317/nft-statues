@@ -15,7 +15,6 @@ export const statue = defineType({
       title: "Title",
       type: "string",
     }),
-    //@ts-expect-error
     orderRankField({ type: "statue" }),
     defineField({
       name: "price",

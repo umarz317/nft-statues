@@ -11,7 +11,7 @@ export default function MintSection({ statues }: { statues: any[] }) {
           <>
             Mint a Table Top, a Shorty, a Biggie
             <br />
-            or a 2Mac Statue for your Home.
+            or a 2Mac Statue for your Home
           </>
         }
       />

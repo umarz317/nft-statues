@@ -15,11 +15,11 @@ function RoadmapStep({
     <div className="flex flex-row items-center gap-4">
       <span
         style={bebas.style}
-        className="block text-white text-8xl -mb-3 tracking-tighter"
+        className="block text-white text-7xl -mb-3 tracking-tighter"
       >
         {number}
       </span>
-      <p className="text-white font-medium tracking-tighter uppercase text-[2rem] leading-tight">
+      <p className="text-white font-medium tracking-tighter uppercase text-[1.65rem] leading-tight">
         <span className="text-[#ff3600] font-bold">{keyword}</span>{" "}
         {description}
       </p>
@@ -41,7 +41,7 @@ export default function RoadmapSection() {
           </>
         }
       />
-      <div className="flex flex-row mt-32">
+      <div className="flex flex-row mt-32 px-40">
         <div className="flex flex-col gap-[20%] mt-24 -mr-[8vw] z-[1]">
           <RoadmapStep
             number="01"

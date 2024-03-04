@@ -49,14 +49,14 @@ export default function HeroSection({}) {
         width={1200 * 2}
         height={1200 * 2}
         alt=""
-        className="absolute w-[40%] z-[3] left-1/2 -translate-x-1/2 top-0"
+        className="absolute w-[35%] z-[3] left-1/2 -translate-x-1/2 top-0"
       />
       <Image
         src="/static/images/jimboStatue.png"
         width={1200}
         height={2200}
         alt=""
-        className="w-auto h-[90%] z-[1]"
+        className="w-auto h-[85%] z-[1]"
       />
       <Link
         href="/#mint"
@@ -73,7 +73,7 @@ export default function HeroSection({}) {
       >
         <h1
           style={bebas.style}
-          className="text-[12rem] whitespace-nowrap text-white"
+          className="text-[10rem] whitespace-nowrap text-white"
         >
           YOUR DIGITAL STATUE NFT
         </h1>

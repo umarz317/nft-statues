@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const isSanity = router.pathname.includes("sanity");
   return (
-    <div className="layout-wrapper">
+    <div className="layout-wrapper w-screen overflow-hidden">
       <MintItemDrawer />
       {!isSanity && <Nav />}
       {children}

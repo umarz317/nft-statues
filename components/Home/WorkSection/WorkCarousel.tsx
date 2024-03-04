@@ -20,7 +20,7 @@ function WorkItem({ imageSRC }: { imageSRC: string }) {
 
 export default function WorkCarousel() {
   return (
-    <div className="carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
+    <div className="work-carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
       <div className="buttons w-fit mr-24 flex flex-row items-center gap-3">
         <button className="swiper-prev size-16 bg-white rounded-lg flex items-center justify-center">
           <span className="block w-6">
@@ -58,13 +58,13 @@ export default function WorkCarousel() {
       <Swiper
         modules={[Navigation]}
         spaceBetween={40}
-        slidesPerView={4}
+        slidesPerView={3}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
-        className="w-full"
+        className="w-[110%]"
         navigation={{
-          nextEl: ".swiper-next",
-          prevEl: ".swiper-prev",
+          nextEl: ".work-carousel-wrapper .swiper-next",
+          prevEl: ".work-carousel-wrapper .swiper-prev",
         }}
       >
         <SwiperSlide>
@@ -85,6 +85,10 @@ export default function WorkCarousel() {
         <SwiperSlide>
           <WorkItem imageSRC="/static/images/test.png" />
         </SwiperSlide>
+        <SwiperSlide>
+          <WorkItem imageSRC="/static/images/test.png" />
+        </SwiperSlide>
+        <SwiperSlide className="slide-spacer"></SwiperSlide>
       </Swiper>
     </div>
   );

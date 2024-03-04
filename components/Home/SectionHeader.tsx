@@ -9,10 +9,10 @@ export default function SectionHeader({
 }) {
   return (
     <div className="section-header flex flex-col items-center relative z-10">
-      <h2 style={bebas.style} className="text-9xl text-white uppercase">
+      <h2 style={bebas.style} className="text-8xl text-white uppercase">
         {title}
       </h2>
-      <p className="text-[#A0A0A0] font-medium tracking-tighter text-center text-3xl">
+      <p className="text-[#A0A0A0] font-medium tracking-tighter text-center text-2xl">
         {description}
       </p>
     </div>

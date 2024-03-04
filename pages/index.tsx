@@ -9,6 +9,7 @@ import RoadmapSection from "@/components/Home/Roadmap";
 import MintSection from "@/components/Home/MintSection";
 import { groq } from "next-sanity";
 import { sanityClient } from "@/lib/sanity/sanityClient";
+import { Marquee } from "@/components/Marquee";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,6 +51,10 @@ export default function Home({ statues }: { statues: any[] }) {
       </Head>
       <main className="bg-black">
         <HeroSection />
+        <div className="rotate-[2.5deg]">
+          <Marquee />
+        </div>
+
         <UtilitySection />
         <WorkSection />
         <RoadmapSection />

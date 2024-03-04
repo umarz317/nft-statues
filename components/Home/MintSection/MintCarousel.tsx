@@ -102,7 +102,7 @@ function MintItem({
 
 export default function MintCarousel({ statues }: { statues: any[] }) {
   return (
-    <div className="carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
+    <div className="mint-carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
       <div className="buttons w-fit mr-24 flex flex-row items-center gap-3">
         <button className="swiper-prev size-16 bg-white rounded-lg flex items-center justify-center">
           <span className="block w-6">
@@ -139,15 +139,21 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
       </div>
       <Swiper
         modules={[Navigation]}
-        spaceBetween={40}
+        spaceBetween={30}
         slidesPerView={3}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
-        className="w-full"
+        className="w-[120%]"
         navigation={{
-          nextEl: ".swiper-next",
-          prevEl: ".swiper-prev",
+          nextEl: ".mint-carousel-wrapper .swiper-next",
+          prevEl: ".mint-carousel-wrapper .swiper-prev",
         }}
+        style={
+          {
+            // marginLeft: "8rem",
+            // paddingRight: "10%",
+          }
+        }
       >
         {statues.map((statue) => (
           <SwiperSlide key={statue._id}>
@@ -162,7 +168,7 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
           </SwiperSlide>
         ))}
         {statues.map((statue) => (
-          <SwiperSlide key={statue._id}>
+          <SwiperSlide key={`2${statue._id}`}>
             <MintItem
               title={statue.title}
               height={statue.height}
@@ -173,6 +179,8 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
             />
           </SwiperSlide>
         ))}
+
+        <SwiperSlide className="slider-spacer"></SwiperSlide>
       </Swiper>
     </div>
   );

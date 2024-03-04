@@ -14,3 +14,9 @@ html {
 .hero-statue {
   transform-style: preserve-3d;
 }
+
+img,
+button,
+a {
+  user-select: none;
+}

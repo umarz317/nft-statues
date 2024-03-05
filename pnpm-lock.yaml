@@ -62,6 +62,9 @@ dependencies:
   sharp:
     specifier: ^0.33.1
     version: 0.33.1
+  split-type:
+    specifier: ^0.3.4
+    version: 0.3.4
   swiper:
     specifier: ^11.0.7
     version: 11.0.7
@@ -6428,6 +6431,10 @@ packages:
 
   /speedometer@1.0.0:
     resolution: {integrity: sha512-lgxErLl/7A5+vgIIXsh9MbeukOaCb2axgQ+bKCdIE+ibNT4XNYGNCR1qFEGq6F+YDASXK3Fh/c5FgtZchFolxw==}
+    dev: false
+
+  /split-type@0.3.4:
+    resolution: {integrity: sha512-otEk9vnD8qwfLsk3Lx0gz+qRkNIJCx0mlyL47ImP/DjMuV39d75Lpfwjn9fHteDRz0aoOblSzQjSNT9+Sswxcg==}
     dev: false
 
   /split2@3.2.2:

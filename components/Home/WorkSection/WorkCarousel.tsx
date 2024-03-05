@@ -3,6 +3,8 @@ import { Navigation } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 import Image from "next/image";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
+import { gsap } from "@/lib/gsap";
 
 function WorkItem({ imageSRC }: { imageSRC: string }) {
   return (
@@ -19,6 +21,29 @@ function WorkItem({ imageSRC }: { imageSRC: string }) {
 }
 
 export default function WorkCarousel() {
+  useIsomorphicLayoutEffect(() => {
+    let animInTlFirst = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".work-carousel-wrapper",
+        start: "top 70%",
+        // markers: true,
+      },
+    });
+
+    animInTlFirst.fromTo(
+      ".work-carousel-wrapper .buttons",
+      { y: "100%", opacity: 0 },
+      { y: 0, opacity: 1, duration: 1 },
+      0
+    );
+    animInTlFirst.fromTo(
+      ".work-carousel-wrapper .swiper-slide",
+      { x: "100%", opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.5, stagger: 0.1 },
+      0
+    );
+  }, []);
+
   return (
     <div className="work-carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
       <div className="buttons w-fit mr-24 flex flex-row items-center gap-3">

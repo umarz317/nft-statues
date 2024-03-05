@@ -9,7 +9,7 @@ import RoadmapSection from "@/components/Home/Roadmap";
 import MintSection from "@/components/Home/MintSection";
 import { groq } from "next-sanity";
 import { sanityClient } from "@/lib/sanity/sanityClient";
-import { Marquee } from "@/components/Marquee";
+import Marquee from "@/components/Marquee";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,14 +35,14 @@ export default function Home({ statues }: { statues: any[] }) {
         />
         <meta
           property="og:image"
-          content="https://sohub.digital/ShareThumb.png"
+          content="https://nft-statues.vercel.app/shareThumb.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="sohub" />
+        <meta property="og:image:alt" content="nft statues" />
         <meta property="og:image:type" content="image/png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="theme-color" content="#000" />
+        <meta name="theme-color" content="#ff3600" />
         <meta name="robots" content="noindex,nofollow" />
         <meta
           name="viewport"
@@ -51,12 +51,10 @@ export default function Home({ statues }: { statues: any[] }) {
       </Head>
       <main className="bg-black">
         <HeroSection />
-        <div className="rotate-[2.5deg]">
-          <Marquee />
-        </div>
-
+        <Marquee identifier="utilities-marq" />
         <UtilitySection />
         <WorkSection />
+        <Marquee identifier="roadmap-marq" className="rotate-[-2.5deg] py-32" />
         <RoadmapSection />
         <MintSection statues={statues} />
       </main>

@@ -101,6 +101,29 @@ function MintItem({
 }
 
 export default function MintCarousel({ statues }: { statues: any[] }) {
+  useIsomorphicLayoutEffect(() => {
+    let animInTlFirst = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".mint-carousel-wrapper",
+        start: "top 70%",
+        // markers: true,
+      },
+    });
+
+    animInTlFirst.fromTo(
+      ".mint-carousel-wrapper .buttons",
+      { y: "100%", opacity: 0 },
+      { y: 0, opacity: 1, duration: 1 },
+      0
+    );
+    animInTlFirst.fromTo(
+      ".mint-carousel-wrapper .swiper-slide",
+      { x: "100%", opacity: 0 },
+      { x: 0, opacity: 1, duration: 1.5, stagger: 0.1 },
+      0
+    );
+  }, []);
+
   return (
     <div className="mint-carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
       <div className="buttons w-fit mr-24 flex flex-row items-center gap-3">

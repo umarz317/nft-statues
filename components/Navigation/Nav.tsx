@@ -11,7 +11,7 @@ function NavItem({ href, text }: { href: string; text: string }) {
 
 export default function Nav({}) {
   return (
-    <div className="fixed z-[999] left-0 top-0 w-full px-20 pt-8">
+    <div className="fixed nav-wrapper z-[999] left-0 top-0 w-full px-20 pt-8 -translate-y-[100%]">
       <div className="w-full backdrop-blur-lg relative rounded-full bg-[#1E1E1E]/50 py-8 px-16 flex flex-row items-center justify-between">
         <Link
           href="/"

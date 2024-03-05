@@ -21,3 +21,25 @@ button,
 a {
   user-select: none;
 }
+
+.locked {
+  overflow: hidden !important;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+  background: #282828;
+}
+
+.anim-char {
+  font-kerning: none;
+}

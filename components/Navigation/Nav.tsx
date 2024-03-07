@@ -11,16 +11,16 @@ function NavItem({ href, text }: { href: string; text: string }) {
 
 export default function Nav({}) {
   return (
-    <div className="fixed nav-wrapper z-[999] left-0 top-0 w-full px-20 pt-8 -translate-y-[100%]">
-      <div className="w-full backdrop-blur-lg relative rounded-full bg-[#1E1E1E]/50 py-8 px-16 flex flex-row items-center justify-between">
+    <div className="fixed nav-wrapper z-[999] left-0 top-0 w-full px-4 lg:px-20 pt-8 -translate-y-[100%]">
+      <div className="w-full backdrop-blur-lg relative rounded-full bg-[#1E1E1E]/50 py-6 lg:py-8 px-8 lg:px-16 flex flex-row items-center justify-between">
         <Link
           href="/"
           style={bebas.style}
-          className="uppercase block text-white text-4xl -mb-1"
+          className="uppercase block text-white text-2xl lg:text-4xl -mb-1"
         >
           NFT Statues
         </Link>
-        <nav className="absolute left-1/2 -translate-x-1/2 flex flex-row items-center gap-12">
+        <nav className="absolute left-1/2 -translate-x-1/2 hidden lg:flex flex-row items-center gap-12">
           <NavItem href="/#nft" text="NFT" />
           <NavItem href="/#utility" text="Utility" />
           <NavItem href="/#work" text="Work" />
@@ -30,7 +30,7 @@ export default function Nav({}) {
         </nav>
         <Link
           href="/"
-          className="block text-[#FF3600] text-2xl font-medium tracking-tighter"
+          className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter"
         >
           Connect Wallet
         </Link>

@@ -10,6 +10,7 @@ import MintSection from "@/components/Home/MintSection";
 import { groq } from "next-sanity";
 import { sanityClient } from "@/lib/sanity/sanityClient";
 import Marquee from "@/components/Marquee";
+import FaQSection from "@/components/Home/FaQSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,12 +52,22 @@ export default function Home({ statues }: { statues: any[] }) {
       </Head>
       <main className="bg-black">
         <HeroSection />
-        <Marquee identifier="utilities-marq" />
+        <Marquee
+          identifier="utilities-marq"
+          text1="Entering utilities section"
+          text2="Keep scrolling"
+        />
         <UtilitySection />
         <WorkSection />
-        <Marquee identifier="roadmap-marq" className="rotate-[-2.5deg] py-32" />
+        <Marquee
+          identifier="roadmap-marq"
+          className="rotate-[-2.5deg] py-32"
+          text1="Entering roadmap section"
+          text2="Keep scrolling"
+        />
         <RoadmapSection />
         <MintSection statues={statues} />
+        <FaQSection />
       </main>
     </>
   );

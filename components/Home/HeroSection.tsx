@@ -42,38 +42,46 @@ export default function HeroSection({}) {
   return (
     <section
       ref={hoverRef}
-      className="w-screen h-screen hero-section relative overflow-hidden flex items-end justify-center"
+      className="w-screen min-h-screen lg:h-screen hero-section relative overflow-hidden flex flex-col items-center justify-end"
     >
-      <Image
-        src="/static/images/light.png"
-        width={1200 * 2}
-        height={1200 * 2}
-        alt=""
-        className="absolute w-[35%] z-[3] left-1/2 -translate-x-1/2 top-0"
-      />
+      <div className="absolute hero-light left-1/2 -translate-x-1/2 top-0 w-full lg:w-[35%] z-[3] h-0 overflow-hidden">
+        <Image
+          src="/static/images/light.png"
+          width={1200 * 2}
+          height={1200 * 2}
+          alt=""
+          className="w-full"
+        />
+      </div>
+      <h1
+        style={bebas.style}
+        className="pt-40 pb-10 text-5xl lg:hidden text-white px-4 text-center"
+      >
+        YOUR DIGITAL STATUE NFT
+      </h1>
       <Image
         src="/static/images/jimboStatue.png"
         width={1200}
         height={2200}
         alt=""
-        className="w-auto h-[85%] z-[1]"
+        className="w-auto hero-stat scale-90 max-w-[90%] object-contain object-bottom h-[85%] z-[1]"
       />
       <Link
         href="/#mint"
         style={{
           boxShadow: "0px 0px 20px 5px rgba(255,54,0,0.42)",
         }}
-        className="uppercase absolute z-[4] bottom-[15%] rounded-full text-black tracking-tighter font-semibold text-2xl px-16 py-4 bg-[#FF3600]"
+        className="uppercase absolute z-[4] bottom-[15%] rounded-full text-black tracking-tighter font-semibold text-lg lg:text-2xl px-10 lg:px-16 py-3 lg:py-4 bg-[#FF3600]"
       >
         Mint now
       </Link>
       <div
         ref={cardRef}
-        className="absolute hero-statue z-[0] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+        className="hidden lg:block absolute hero-statue z-[0] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
       >
         <h1
           style={bebas.style}
-          className="text-[10rem] whitespace-nowrap text-white"
+          className="text-5xl lg:text-[10rem] whitespace-nowrap text-white"
         >
           YOUR DIGITAL STATUE NFT
         </h1>

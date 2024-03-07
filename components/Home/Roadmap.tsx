@@ -12,14 +12,14 @@ function RoadmapStep({
   description: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-row items-center gap-4">
+    <div className="flex flex-row items-center gap-4 py-4 lg:py-0 border-b-[1px] border-[#a0a0a0]/20 lg:border-none">
       <span
         style={bebas.style}
-        className="block text-white text-7xl -mb-3 tracking-tighter"
+        className="block text-white text-6xl lg:text-7xl -mb-1 lg:-mb-3 tracking-tighter"
       >
         {number}
       </span>
-      <p className="text-white font-medium tracking-tighter uppercase text-[1.65rem] leading-tight">
+      <p className="text-white font-medium tracking-tighter uppercase text-[1.25rem] leading-tight">
         <span className="text-[#ff3600] font-bold">{keyword}</span>{" "}
         {description}
       </p>
@@ -29,7 +29,7 @@ function RoadmapStep({
 
 export default function RoadmapSection() {
   return (
-    <section className="roadmap-section pt-16 w-screen relative flex flex-col items-center pb-64">
+    <section className="roadmap-section pt-16 w-screen relative flex flex-col items-center pb-24 lg:pb-64">
       <div id="roadmap" className="absolute top-0 -mt-32 h-32" />
       <SectionHeader
         title={<>ROADMAP</>}
@@ -41,8 +41,8 @@ export default function RoadmapSection() {
           </>
         }
       />
-      <div className="flex flex-row mt-32 px-40">
-        <div className="flex flex-col gap-[20%] mt-24 -mr-[8vw] z-[1]">
+      <div className="flex flex-col lg:flex-row mt-12 lg:mt-32 px-8 lg:px-40">
+        <div className="order-1 flex flex-col lg:gap-[20%] lg:mt-24 lg:-mr-[8vw] z-[1]">
           <RoadmapStep
             number="01"
             keyword="Release"
@@ -72,7 +72,7 @@ export default function RoadmapSection() {
             }
           />
         </div>
-        <div className="z-0 relative">
+        <div className="order-4 lg:order-2 z-0 relative mt-8 lg:mt-0">
           <div className="h-1/3 w-full absolute left-0 bottom-0 bg-gradient-to-t from-black to-transparent" />
           <Image
             src="/static/images/jimboStatue2.png"
@@ -81,7 +81,7 @@ export default function RoadmapSection() {
             alt=""
           />
         </div>
-        <div className="flex flex-col gap-[20%] mt-24 -ml-[8vw] z-[1]">
+        <div className="order-3 flex flex-col lg:gap-[20%] lg:mt-24 lg:-ml-[8vw] z-[1]">
           <RoadmapStep
             number="04"
             keyword="Delivery"

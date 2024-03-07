@@ -31,20 +31,20 @@ function MintItem({
     <>
       <div
         id={titleWithoutSpaces}
-        className="mint-item relative w-full aspect-square h-auto bg-[#0F0F0F] rounded-3xl p-10 flex flex-col justify-between"
+        className="mint-item relative w-full lg:aspect-square h-auto bg-[#0F0F0F] rounded-3xl p-6 lg:p-10 flex flex-col justify-between"
       >
-        <div className="w-full flex flex-col">
-          <span className="block text-white text-3xl">{title}</span>
+        <div className="order-1 w-full flex flex-col">
+          <span className="block text-white text-2xl lg:text-3xl">{title}</span>
           <p className="text-[#A0A0A0] text-xl">{height} Meters Height</p>
         </div>
-        <div className="w-full flex flex-row items-center justify-between relative z-10">
+        <div className="order-4 lg:order-2 w-full flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-0 mt-4 lg:mt-0 relative z-10">
           <span className="block text-white font-semibold text-xl">
             {price} ETH
           </span>
-          <div className="flex flex-row items-center gap-4 select-none">
-            <button className="flex flex-row items-center gap-2 text-black font-semibold text-lg tracking-tighter bg-white rounded-full px-10 py-2">
+          <div className="flex flex-col lg:flex-row items-center gap-3 lg:gap-4 select-none w-full lg:w-fit">
+            <button className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2">
               <span>Mint</span>
-              <span className="block w-3">
+              <span className="block w-3 group-hover:translate-x-2 transition-transform duration-300 ease-out">
                 <svg
                   width="100%"
                   viewBox="0 0 15 12"
@@ -68,10 +68,10 @@ function MintItem({
                 setWeight(weight);
                 setOpen(true);
               }}
-              className="flex flex-row items-center gap-2 text-black font-semibold text-lg tracking-tighter bg-[#ff3600] rounded-full px-10 py-2"
+              className="w-full  lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-lg tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
             >
               <span>More Details</span>
-              <span className="block w-3">
+              <span className="block w-3 group-hover:translate-x-2 transition-transform duration-300 ease-out">
                 <svg
                   width="100%"
                   viewBox="0 0 15 12"
@@ -92,7 +92,11 @@ function MintItem({
           src={imageSRC}
           width={600}
           height={600}
-          className="w-full z-0 h-[80%] absolute left-1/2 -translate-x-1/2 bottom-0 object-contain rounded-xl"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 0%, black 10%, transparent 100%)",
+          }}
+          className="order-3 mt-6 lg:mt-0 w-full z-0 h-[80%] lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 object-contain rounded-xl"
           alt={title + "Statue"}
         />
       </div>
@@ -125,10 +129,10 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
   }, []);
 
   return (
-    <div className="mint-carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
-      <div className="buttons w-fit mr-24 flex flex-row items-center gap-3">
-        <button className="swiper-prev size-16 bg-white rounded-lg flex items-center justify-center">
-          <span className="block w-6">
+    <div className="mint-carousel-wrapper pl-8 lg:pl-64 mt-16 flex flex-col items-end gap-8">
+      <div className="buttons w-fit mr-12 lg:mr-24 flex flex-row items-center gap-2 lg:gap-3">
+        <button className="swiper-prev size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+          <span className="block w-4 lg:w-6">
             <svg
               width="100%"
               viewBox="0 0 25 22"
@@ -143,8 +147,8 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
             </svg>
           </span>
         </button>
-        <button className="swiper-next size-16 bg-white rounded-lg flex items-center justify-center">
-          <span className="block w-6 scale-[-1]">
+        <button className="swiper-next size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+          <span className="block w-4 lg:w-6 scale-[-1]">
             <svg
               width="100%"
               viewBox="0 0 25 22"
@@ -162,21 +166,25 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
       </div>
       <Swiper
         modules={[Navigation]}
-        spaceBetween={30}
-        slidesPerView={3}
+        spaceBetween={15}
+        slidesPerView={1.3}
+        slidesOffsetAfter={48}
+        grabCursor={true}
+        breakpoints={{
+          1024: {
+            slidesPerView: 2.5,
+            spaceBetween: 25,
+            centerInsufficientSlides: true,
+            slidesOffsetAfter: 96,
+          },
+        }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
-        className="w-[120%]"
+        className="w-full"
         navigation={{
           nextEl: ".mint-carousel-wrapper .swiper-next",
           prevEl: ".mint-carousel-wrapper .swiper-prev",
         }}
-        style={
-          {
-            // marginLeft: "8rem",
-            // paddingRight: "10%",
-          }
-        }
       >
         {statues.map((statue) => (
           <SwiperSlide key={statue._id}>
@@ -202,8 +210,6 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
             />
           </SwiperSlide>
         ))}
-
-        <SwiperSlide className="slider-spacer"></SwiperSlide>
       </Swiper>
     </div>
   );

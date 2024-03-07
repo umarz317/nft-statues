@@ -13,7 +13,7 @@ function WorkItem({ imageSRC }: { imageSRC: string }) {
         src={imageSRC}
         width={600}
         height={600}
-        className="w-full object-cover rounded-xl"
+        className="w-full object-cover rounded-md lg:rounded-xl"
         alt="work-item"
       />
     </div>
@@ -45,10 +45,10 @@ export default function WorkCarousel() {
   }, []);
 
   return (
-    <div className="work-carousel-wrapper pl-64 mt-16 flex flex-col items-end gap-8">
-      <div className="buttons w-fit mr-24 flex flex-row items-center gap-3">
-        <button className="swiper-prev size-16 bg-white rounded-lg flex items-center justify-center">
-          <span className="block w-6">
+    <div className="work-carousel-wrapper pl-12 lg:pl-64 mt-16 flex flex-col items-end gap-8">
+      <div className="buttons w-fit mr-12 lg:mr-24 flex flex-row items-center gap-2 lg:gap-3">
+        <button className="swiper-prev size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+          <span className="block w-4 lg:w-6">
             <svg
               width="100%"
               viewBox="0 0 25 22"
@@ -63,8 +63,8 @@ export default function WorkCarousel() {
             </svg>
           </span>
         </button>
-        <button className="swiper-next size-16 bg-white rounded-lg flex items-center justify-center">
-          <span className="block w-6 scale-[-1]">
+        <button className="swiper-next size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+          <span className="block w-4 lg:w-6 scale-[-1]">
             <svg
               width="100%"
               viewBox="0 0 25 22"
@@ -82,11 +82,21 @@ export default function WorkCarousel() {
       </div>
       <Swiper
         modules={[Navigation]}
-        spaceBetween={40}
-        slidesPerView={3}
+        spaceBetween={15}
+        slidesPerView={1.5}
+        slidesOffsetAfter={48}
+        grabCursor={true}
+        breakpoints={{
+          1024: {
+            slidesPerView: 2.5,
+            spaceBetween: 25,
+            centerInsufficientSlides: true,
+            slidesOffsetAfter: 96,
+          },
+        }}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
-        className="w-[110%]"
+        className="w-full"
         navigation={{
           nextEl: ".work-carousel-wrapper .swiper-next",
           prevEl: ".work-carousel-wrapper .swiper-prev",
@@ -113,7 +123,7 @@ export default function WorkCarousel() {
         <SwiperSlide>
           <WorkItem imageSRC="/static/images/test.png" />
         </SwiperSlide>
-        <SwiperSlide className="slide-spacer"></SwiperSlide>
+        {/* <SwiperSlide className="slide-spacer"></SwiperSlide> */}
       </Swiper>
     </div>
   );

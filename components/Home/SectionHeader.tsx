@@ -66,15 +66,15 @@ export default function SectionHeader({
   return (
     <div
       ref={ref}
-      className="section-header flex flex-col items-center relative z-10"
+      className="section-header flex flex-col items-center relative z-10 px-4"
     >
       <h2
         style={bebas.style}
-        className="anim-char text-8xl text-white uppercase"
+        className="anim-char text-center text-5xl lg:text-8xl text-white uppercase"
       >
         {title}
       </h2>
-      <p className="text-[#A0A0A0] anim-line font-medium tracking-tighter text-center text-2xl">
+      <p className="text-[#A0A0A0] anim-line font-medium tracking-tighter text-center text-lg lg:text-2xl">
         {description}
       </p>
     </div>

@@ -8,14 +8,14 @@ gsap.registerPlugin(Observer);
 
 function MarqueeItem({ text }: { text: string }) {
   return (
-    <div className="relative flex flex-row items-center py-5 overflow-hidden">
+    <div className="relative flex flex-row items-center py-4 lg:py-5 overflow-hidden">
       <span
         style={GeistSans.style}
-        className="text-black text-2xl font-semibold px-6 uppercase whitespace-nowrap"
+        className="text-black text-lg lg:text-2xl font-semibold px-5 lg:px-6 uppercase whitespace-nowrap"
       >
         {text}
       </span>
-      <span className="block w-5">
+      <span className="block w-4 lg:w-5">
         <svg
           width="100%"
           viewBox="0 0 23 20"
@@ -34,7 +34,15 @@ function MarqueeItem({ text }: { text: string }) {
   );
 }
 
-function MarqueeRow({ index }: { index: number }) {
+function MarqueeRow({
+  index,
+  text1,
+  text2,
+}: {
+  index: number;
+  text1: string;
+  text2: string;
+}) {
   return (
     <div
       style={
@@ -329,14 +337,14 @@ function MarqueeRow({ index }: { index: number }) {
         </svg>
       </span>
 
-      <MarqueeItem text="THEMISREIT.COM" />
-      <MarqueeItem text="CLICK TO FOLLOW ME ON X" />
-      <MarqueeItem text="THEMISREIT.COM" />
-      <MarqueeItem text="CLICK TO FOLLOW ME ON X" />
-      <MarqueeItem text="THEMISREIT.COM" />
-      <MarqueeItem text="CLICK TO FOLLOW ME ON X" />
-      <MarqueeItem text="THEMISREIT.COM" />
-      <MarqueeItem text="CLICK TO FOLLOW ME ON X" />
+      <MarqueeItem text={text1} />
+      <MarqueeItem text={text2} />
+      <MarqueeItem text={text1} />
+      <MarqueeItem text={text2} />
+      <MarqueeItem text={text1} />
+      <MarqueeItem text={text2} />
+      <MarqueeItem text={text1} />
+      <MarqueeItem text={text2} />
       <span className="block p-0 m-0 w-full absolute left-0 bottom-0 z-50">
         <svg
           width="100%"
@@ -628,9 +636,13 @@ function MarqueeRow({ index }: { index: number }) {
 export default function Marquee({
   identifier,
   className,
+  text1 = "This is a marquee",
+  text2 = "Just scrolling",
 }: {
   identifier: string;
   className?: string;
+  text1?: string;
+  text2?: string;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -678,8 +690,8 @@ export default function Marquee({
         className="flex flex-row items-center w-[100%] relative"
       >
         <div className="absolute w-full bg-[#ff3600] h-[90%]"></div>
-        <MarqueeRow index={0} />
-        <MarqueeRow index={1} />
+        <MarqueeRow index={0} text1={text1} text2={text2} />
+        <MarqueeRow index={1} text1={text1} text2={text2} />
       </div>
     </div>
   );

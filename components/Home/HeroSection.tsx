@@ -42,8 +42,9 @@ export default function HeroSection({}) {
   return (
     <section
       ref={hoverRef}
-      className="w-screen min-h-screen lg:h-screen hero-section relative overflow-hidden flex flex-col items-center justify-end"
+      className="w-screen lg:h-screen hero-section relative overflow-hidden flex flex-col items-center justify-end"
     >
+      <div id="nft" className="absolute top-0 -mt-32 h-32" />
       <div className="absolute hero-light left-1/2 -translate-x-1/2 top-0 w-full lg:w-[35%] z-[3] h-0 overflow-hidden">
         <Image
           src="/static/images/light.png"
@@ -71,7 +72,7 @@ export default function HeroSection({}) {
         style={{
           boxShadow: "0px 0px 20px 5px rgba(255,54,0,0.42)",
         }}
-        className="uppercase absolute z-[4] bottom-[15%] rounded-full text-black tracking-tighter font-semibold text-lg lg:text-2xl px-10 lg:px-16 py-3 lg:py-4 bg-[#FF3600]"
+        className="uppercase hover:scale-105 transition-transform duration-300 ease-out absolute z-[4] bottom-[15%] rounded-full text-black tracking-tighter font-semibold text-lg lg:text-2xl px-10 lg:px-16 py-3 lg:py-4 bg-[#FF3600]"
       >
         Mint now
       </Link>

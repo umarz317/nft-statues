@@ -95,10 +95,10 @@ export default function MintItemDrawer() {
             />
           </div>
           <div>
-            <span className="block text-black font-semibold tracking-tighter text-2xl lg:text-4xl">
+            <span className="block text-black font-semibold tracking-tighter text-2xl lg:text-3xl">
               Shipping
             </span>
-            <p className="text-[#A0A0A0] mt-4 font-medium tracking-tighter text-xl lg:text-3xl">
+            <p className="text-[#A0A0A0] mt-4 font-medium tracking-tighter text-xl lg:text-2xl">
               All physical statues will be shipped as soon as completed. Once
               you forge your statue you will get an email that will confirm the
               estimated delivery.

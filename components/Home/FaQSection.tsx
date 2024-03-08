@@ -17,50 +17,38 @@ function FaQItem({
   const ref = useRef<HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
-    const animInChar = ref.current!.querySelectorAll(
-      ".anim-char"
+    const wrapper = ref.current as HTMLDivElement;
+    const animIn = wrapper.querySelectorAll(
+      ".anim-in"
     ) as NodeListOf<HTMLElement>;
-    const animInLine = ref.current!.querySelectorAll(
-      ".anim-line"
-    ) as NodeListOf<HTMLElement>;
-    const divider = ref.current!.querySelector(".divider") as HTMLElement;
 
-    const splitChars = SplitType.create(animInChar, {
-      types: "words",
-    }) as { words: HTMLElement[] };
-    const splitLines = SplitType.create(animInLine, {
-      types: "lines",
-    }) as { lines: HTMLElement[] };
-
-    splitChars.words.forEach((char) => {
-      char.classList.add("anim-in-char");
-    });
-
-    splitLines.lines.forEach((line) => {
-      line.classList.add("anim-in-line");
-    });
-
-    let animInTlFirst = gsap.timeline({
+    const showTl = gsap.timeline({
       scrollTrigger: {
-        trigger: ref.current!,
-        start: "-10% 90%",
-        end: "bottom 75%",
-        scrub: 2,
+        trigger: wrapper,
+        start: "top 70%",
+        end: "60% center",
         // markers: true,
+        scrub: 1,
       },
-      //   onComplete: () => {
-      //     //@ts-expect-error
-      //     splitChars.revert();
-      //     //@ts-expect-error
-      //     splitLines.revert();
-      //   },
     });
 
-    animInTlFirst.fromTo(
-      [splitChars.words, splitLines.lines, divider],
-      { y: "100%", opacity: 0 },
-      { y: 0, opacity: 1, stagger: 0.05 }
+    showTl.fromTo(
+      animIn,
+      {
+        y: "4rem",
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        stagger: 0.05,
+      },
+      0
     );
+
+    return () => {
+      showTl.kill();
+    };
   }, []);
   return (
     <div ref={ref} className="flex flex-col gap-2 lg:gap-4 w-full">
@@ -68,15 +56,15 @@ function FaQItem({
         style={bebas.style}
         className="flex flex-row items-center justify-between w-full gap-4"
       >
-        <span className="text-4xl lg:text-6xl tracking-tight text-white anim-line">
+        <span className="text-4xl lg:text-6xl tracking-tight text-white anim-in">
           {question}
         </span>
-        <span className="hidden lg:blocktext-6xl tracking-tight text-white anim-char">
+        <span className="hidden lg:block text-6xl tracking-tight text-white anim-in">
           {number}
         </span>
       </div>
-      <div className="w-full bg-[#A0A0A0]/30 h-[1px] divider" />
-      <p className="text-[#A0A0A0] text-xl lg:text-3xl font-medium tracking-tighter anim-line">
+      <div className="w-full bg-[#A0A0A0]/30 h-[1px] divider anim-in" />
+      <p className="text-[#A0A0A0] text-xl lg:text-3xl font-medium tracking-tighter anim-in">
         {answer}
       </p>
     </div>
@@ -85,7 +73,8 @@ function FaQItem({
 
 export default function FaQSection({}) {
   return (
-    <section className="faq-section py-64 w-screen relative flex flex-col items-center">
+    <section className="faq-section pt-64 pb-[15vh] w-screen relative flex flex-col items-center">
+      <div id="faq" className="absolute top-0 -mt-32 h-32" />
       <SectionHeader
         title={<>FAQ</>}
         description={

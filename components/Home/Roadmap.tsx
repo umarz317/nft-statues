@@ -72,11 +72,31 @@ export default function RoadmapSection() {
             }
           />
         </div>
-        <div className="order-4 lg:order-2 z-0 relative mt-8 lg:mt-0">
-          <div className="h-1/3 w-full absolute left-0 bottom-0 bg-gradient-to-t from-black to-transparent" />
+        <div className="order-4 lg:order-2 z-0 relative mt-8 lg:mt-0 flex justify-center">
+          <div className="h-1/3 w-full absolute left-0 bottom-0 bg-gradient-to-t from-black to-transparent z-20" />
+          <span className="block w-1/3 absolute z-0 top-[12%] -translate-x-[6%]">
+            <svg
+              style={{
+                filter: "drop-shadow(0px 0px 40px rgba(255,255,255,1))",
+              }}
+              width="100%"
+              viewBox="0 0 979 979"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="489.5"
+                cy="489.5"
+                r="470.5"
+                stroke="white"
+                strokeWidth="38"
+              />
+            </svg>
+          </span>
           <Image
             src="/static/images/jimboStatue2.png"
             width={1200}
+            className="z-10"
             height={1200}
             alt=""
           />

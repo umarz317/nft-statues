@@ -39,17 +39,17 @@ export default function Loader() {
           onStart: () => {
             window.scrollTo(0, 0);
           },
-          onComplete: () => {
-            const url = "#" + router.asPath.split("#").pop();
-            if (url !== "#/") {
-              const element = document.querySelector(url);
-              if (element) {
-                element.scrollIntoView({
-                  behavior: "smooth",
-                });
-              }
-            }
-          },
+          // onComplete: () => {
+          //   const url = "#" + router.asPath.split("#").pop();
+          //   if (url !== "#/") {
+          //     const element = document.querySelector(url);
+          //     if (element) {
+          //       element.scrollIntoView({
+          //         behavior: "smooth",
+          //       });
+          //     }
+          //   }
+          // },
         });
         tl.to(
           ".load-text",

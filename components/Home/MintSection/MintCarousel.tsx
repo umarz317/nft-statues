@@ -42,9 +42,9 @@ function MintItem({
             {price} ETH
           </span>
           <div className="flex flex-col lg:flex-row items-center gap-3 lg:gap-4 select-none w-full lg:w-fit">
-            <button className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2">
+            <button className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium lg:font-bold text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2">
               <span>Mint</span>
-              <span className="block w-3 group-hover:translate-x-2 transition-transform duration-300 ease-out">
+              <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
                 <svg
                   width="100%"
                   viewBox="0 0 15 12"
@@ -68,10 +68,10 @@ function MintItem({
                 setWeight(weight);
                 setOpen(true);
               }}
-              className="w-full  lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-lg tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
+              className="w-full  lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium lg:font-bold text-base lg:text-lg tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
             >
               <span>More Details</span>
-              <span className="block w-3 group-hover:translate-x-2 transition-transform duration-300 ease-out">
+              <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
                 <svg
                   width="100%"
                   viewBox="0 0 15 12"

@@ -43,7 +43,7 @@ function TextBox({
   return (
     <div
       ref={ref}
-      className="w-1/2 flex flex-col items-start bg-[#1E1E1E]/50 rounded-3xl p-16 3xl:p-20 gap-4 relative"
+      className="w-full lg:w-1/2 flex flex-col items-start bg-[#1E1E1E]/50 rounded-3xl p-8 lg:p-16 3xl:p-20 gap-4 relative"
     >
       <div className="angles">
         <svg
@@ -149,11 +149,11 @@ function TextBox({
       </div>
       <span
         style={bebas.style}
-        className="text-4xl 3xl:text-5xl text-[#ff3600]"
+        className="text-3xl lg:text-4xl 3xl:text-5xl text-[#ff3600]"
       >
         {title}
       </span>
-      <p className="text-[#A0A0A0] text-lg 3xl:text-xl font-semibold tracking-tighter">
+      <p className="text-[#A0A0A0] leading-tight lg:leading-normal text-base lg:text-lg 3xl:text-xl font-semibold tracking-tighter">
         {text}
       </p>
     </div>
@@ -162,7 +162,7 @@ function TextBox({
 
 export default function UtilitySection() {
   return (
-    <section className="utility-section pt-32 lg:pt-64 w-screen relative min-h-screen pb-32">
+    <section className="utility-section pt-32 lg:pt-64 w-screen relative lg:min-h-screen pb-32">
       <div id="utility" className="absolute top-0 -mt-44 h-32" />
       <SectionHeader
         title={<>WHAT DO YOU GET?</>}
@@ -174,8 +174,8 @@ export default function UtilitySection() {
           </>
         }
       />
-      <div className="mt-16 flex flex-col items-center w-full px-24 gap-12">
-        <div className="flex flex-row gap-12">
+      <div className="mt-16 flex flex-col items-center w-full px-4 lg:px-24 gap-12">
+        <div className="flex flex-col lg:flex-row gap-12">
           <TextBox
             title="Physical Real World Statue Delivered Worldwide:"
             text="Elevate your space with a tangible manifestation of your NFT – a Physical Real World Statue. 

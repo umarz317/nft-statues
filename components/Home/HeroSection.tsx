@@ -104,7 +104,7 @@ export default function HeroSection({}) {
         width={1200}
         height={2200}
         alt=""
-        className="w-auto hero-stat scale-90 max-w-[90%] object-contain object-bottom h-[85%] z-[1]"
+        className="w-full lg:w-auto hero-stat scale-90 max-w-[90%] object-contain object-bottom lg:h-[85%] z-[1]"
       />
       <div className="absolute z-[4] bottom-[10%] text-xl flex flex-col items-center gap-4">
         <button
@@ -116,7 +116,7 @@ export default function HeroSection({}) {
           }}
           className="uppercase hover:scale-105 transition-transform duration-300 ease-out  rounded-full text-black tracking-tighter font-semibold text-lg lg:text-2xl px-10 lg:px-16 py-3 lg:py-4 bg-[#FF3600]"
         >
-          Mint now
+          {!isTimerOver ? "Mint Soon" : "Mint now"}
         </button>
         <span className="text-white">
           {days}d {hours}h {minutes}m {seconds}s

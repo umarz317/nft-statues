@@ -31,6 +31,12 @@ html {
   background: #ff3600;
 }
 
+@media (max-width: 1023px) {
+  .no-mobile-br br {
+    display: none;
+  }
+}
+
 img,
 button,
 a {

@@ -132,7 +132,7 @@ export default function SectionHeader({
   return (
     <div
       ref={ref}
-      className="section-header flex flex-col items-center relative z-10 px-4"
+      className="section-header flex flex-col items-center relative z-10  px-4"
     >
       <h2
         ref={titleRef}
@@ -143,7 +143,7 @@ export default function SectionHeader({
       </h2>
       <p
         ref={textRef}
-        className="text-[#A0A0A0] font-medium tracking-tighter text-center text-lg lg:text-2xl"
+        className="text-[#A0A0A0] font-medium tracking-tighter text-center no-mobile-br text-lg lg:text-2xl"
       >
         {description}
       </p>

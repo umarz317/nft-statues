@@ -3,7 +3,7 @@ import MintCarousel from "./MintCarousel";
 
 export default function MintSection({ statues }: { statues: any[] }) {
   return (
-    <section className="mint-section pt-16 w-screen relative h-screen">
+    <section className="mint-section pt-16 w-screen relative min-h-screen">
       <div id="mint" className="absolute top-0 -mt-32 h-32" />
       <SectionHeader
         title={<>MINT</>}

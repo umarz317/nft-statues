@@ -1,6 +1,8 @@
 import { bebas } from "@/pages/_app";
 import SectionHeader from "./SectionHeader";
 import Image from "next/image";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
+import gsap from "gsap";
 
 function RoadmapStep({
   number,
@@ -12,7 +14,7 @@ function RoadmapStep({
   description: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-row items-center gap-4 py-4 lg:py-0 border-b-[1px] border-[#a0a0a0]/20 lg:border-none">
+    <div className="rd-step flex flex-row items-center gap-4 py-4 lg:py-0 border-b-[1px] border-[#a0a0a0]/20 lg:border-none">
       <span
         style={bebas.style}
         className="block text-white text-6xl lg:text-7xl -mb-1 lg:-mb-3 tracking-tighter"
@@ -28,16 +30,43 @@ function RoadmapStep({
 }
 
 export default function RoadmapSection() {
+  useIsomorphicLayoutEffect(() => {
+    const showTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".roadmap-section",
+        start: "25% bottom",
+        end: "40% center",
+        // markers: true,
+        scrub: 1,
+      },
+    });
+
+    showTl.fromTo(
+      ".rd-step",
+      {
+        y: "4rem",
+        scale: 0.9,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        stagger: 0.1,
+      },
+      0
+    );
+  }, []);
   return (
-    <section className="roadmap-section pt-16 w-screen relative flex flex-col items-center pb-24 lg:pb-64">
+    <section className="roadmap-section pt-16 w-screen relative flex flex-col items-center pb-24">
       <div id="roadmap" className="absolute top-0 -mt-32 h-32" />
       <SectionHeader
         title={<>ROADMAP</>}
         description={
           <>
-            Mint a Table Top, a Shorty, a Biggie
+            This roadmap illustrates
             <br />
-            or a 2Mac Statue for your Home.
+            our launch in phases
           </>
         }
       />
@@ -127,7 +156,7 @@ export default function RoadmapSection() {
             keyword="Release"
             description={
               <>
-                2024 <br /> spring collection
+                2024 <br /> summer collection
               </>
             }
           />

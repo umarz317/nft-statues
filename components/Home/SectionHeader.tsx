@@ -84,7 +84,7 @@ export default function SectionHeader({
     const showTl = gsap.timeline({
       scrollTrigger: {
         trigger: wrapper,
-        start: "top 70%",
+        start: "25% bottom",
         end: "60% center",
         // markers: true,
         scrub: 1,
@@ -95,10 +95,12 @@ export default function SectionHeader({
       textWords,
       {
         y: "4rem",
+        scale: 0.9,
         opacity: 0,
       },
       {
         y: 0,
+        scale: 1,
         opacity: 1,
       },
       0
@@ -107,11 +109,13 @@ export default function SectionHeader({
       textLines,
       {
         y: "4rem",
+        scale: 0.9,
         opacity: 0,
       },
       {
         y: 0,
         opacity: 1,
+        scale: 1,
         stagger: 0.1,
       },
       0

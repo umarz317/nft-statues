@@ -13,7 +13,9 @@ export default function StudioPage() {
           <meta key={key} name={key} content={value} />
         ))}
       </Head>
-      <NextStudio config={config} />
+      <div data-lenis-prevent>
+        <NextStudio config={config} />
+      </div>
     </>
   );
 }

@@ -31,7 +31,7 @@ function MintItem({
     <>
       <div
         id={titleWithoutSpaces}
-        className="mint-item relative w-full lg:aspect-square h-auto bg-[#0F0F0F] rounded-3xl p-6 lg:p-10 flex flex-col justify-between"
+        className="mint-item relative w-full lg:aspect-square h-auto bg-[#0F0F0F] rounded-3xl p-6 lg:p-8 flex flex-col justify-between"
       >
         <div className="order-1 w-full flex flex-col">
           <span className="block text-white text-2xl lg:text-3xl">{title}</span>
@@ -41,8 +41,8 @@ function MintItem({
           <span className="block text-white font-semibold text-xl">
             {price} ETH
           </span>
-          <div className="flex flex-col lg:flex-row items-center gap-3 lg:gap-4 select-none w-full lg:w-fit">
-            <button className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium lg:font-bold text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2">
+          <div className="flex flex-col lg:flex-row items-center gap-3 select-none w-full lg:w-fit">
+            <button className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2">
               <span>Mint</span>
               <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
                 <svg
@@ -68,9 +68,9 @@ function MintItem({
                 setWeight(weight);
                 setOpen(true);
               }}
-              className="w-full  lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium lg:font-bold text-base lg:text-lg tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
+              className="w-full  lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
             >
-              <span>More Details</span>
+              <span>Details</span>
               <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
                 <svg
                   width="100%"
@@ -131,7 +131,7 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
   return (
     <div className="mint-carousel-wrapper pl-8 lg:pl-64 mt-16 flex flex-col items-end gap-8">
       <div className="buttons w-fit mr-12 lg:mr-24 flex flex-row items-center gap-2 lg:gap-3">
-        <button className="swiper-prev size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+        <button className="swiper-prev hover:scale-105 transition-transform duration-300 ease-out size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
           <span className="block w-4 lg:w-6">
             <svg
               width="100%"
@@ -147,7 +147,7 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
             </svg>
           </span>
         </button>
-        <button className="swiper-next size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+        <button className="swiper-next hover:scale-105 transition-transform duration-300 ease-out size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
           <span className="block w-4 lg:w-6 scale-[-1]">
             <svg
               width="100%"
@@ -188,18 +188,6 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
       >
         {statues.map((statue) => (
           <SwiperSlide key={statue._id}>
-            <MintItem
-              title={statue.title}
-              height={statue.height}
-              price={statue.price}
-              imageSRC={urlFor(statue.image).url()}
-              weight={statue.weight}
-              material={statue.material}
-            />
-          </SwiperSlide>
-        ))}
-        {statues.map((statue) => (
-          <SwiperSlide key={`2${statue._id}`}>
             <MintItem
               title={statue.title}
               height={statue.height}

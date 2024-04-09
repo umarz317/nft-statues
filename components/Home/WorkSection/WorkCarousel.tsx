@@ -5,6 +5,7 @@ import "swiper/css";
 import Image from "next/image";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
 import { gsap } from "@/lib/gsap";
+import { urlFor } from "@/lib/sanity/sanityClient";
 
 function WorkItem({ imageSRC }: { imageSRC: string }) {
   return (
@@ -20,12 +21,13 @@ function WorkItem({ imageSRC }: { imageSRC: string }) {
   );
 }
 
-export default function WorkCarousel() {
+export default function WorkCarousel({ works }: { works: any[] }) {
   useIsomorphicLayoutEffect(() => {
     let animInTlFirst = gsap.timeline({
       scrollTrigger: {
         trigger: ".work-carousel-wrapper",
         start: "top 70%",
+        end: "bottom 70%",
         // markers: true,
       },
     });
@@ -42,12 +44,20 @@ export default function WorkCarousel() {
       { x: 0, opacity: 1, duration: 1.5, stagger: 0.1 },
       0
     );
+
+    return () => {
+      animInTlFirst.kill();
+    };
   }, []);
+
+  const worksTimesFive = [...works, ...works, ...works, ...works, ...works];
+
+  const worksShown = works.length < 4 ? worksTimesFive : works;
 
   return (
     <div className="work-carousel-wrapper pl-12 lg:pl-64 mt-16 flex flex-col items-end gap-8">
       <div className="buttons w-fit mr-12 lg:mr-24 flex flex-row items-center gap-2 lg:gap-3">
-        <button className="swiper-prev size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+        <button className="swiper-prev hover:scale-105 transition-transform duration-300 ease-out size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
           <span className="block w-4 lg:w-6">
             <svg
               width="100%"
@@ -63,7 +73,7 @@ export default function WorkCarousel() {
             </svg>
           </span>
         </button>
-        <button className="swiper-next size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
+        <button className="swiper-next hover:scale-105 transition-transform duration-300 ease-out size-10 lg:size-16 bg-white rounded-lg flex items-center justify-center">
           <span className="block w-4 lg:w-6 scale-[-1]">
             <svg
               width="100%"
@@ -102,28 +112,11 @@ export default function WorkCarousel() {
           prevEl: ".work-carousel-wrapper .swiper-prev",
         }}
       >
-        <SwiperSlide>
-          <WorkItem imageSRC="/static/images/test.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkItem imageSRC="/static/images/test.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkItem imageSRC="/static/images/test.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkItem imageSRC="/static/images/test.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkItem imageSRC="/static/images/test.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkItem imageSRC="/static/images/test.png" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <WorkItem imageSRC="/static/images/test.png" />
-        </SwiperSlide>
-        {/* <SwiperSlide className="slide-spacer"></SwiperSlide> */}
+        {worksShown.map((work, i) => (
+          <SwiperSlide key={i}>
+            <WorkItem imageSRC={urlFor(work.image).url()} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

@@ -3,14 +3,17 @@ import { gsap } from "@/lib/gsap";
 import { LoaderMarquee } from "./MarqueeLoader";
 import { bebas } from "@/pages/_app";
 import { useRouter } from "next/router";
+import { useLenis } from "@studio-freight/react-lenis";
 
 export default function Loader() {
   const router = useRouter();
+  const lenis = useLenis(() => {});
 
   useIsomorphicLayoutEffect(() => {
     window.scrollTo(0, 0);
     const html = document.querySelector("html") as HTMLElement;
-    html.classList.add("locked");
+
+    lenis?.stop();
     const tl = gsap.timeline({
       delay: 0.1,
     });
@@ -34,10 +37,17 @@ export default function Loader() {
     const dotTl = gsap.timeline({
       repeat: 2,
       repeatDelay: 0.1,
+      onStart: () => {
+        lenis?.stop();
+        html.classList.add("locked");
+      },
       onComplete: () => {
         const tl = gsap.timeline({
           onStart: () => {
-            window.scrollTo(0, 0);
+            lenis?.scrollTo(0, {
+              immediate: true,
+              force: true,
+            });
           },
           // onComplete: () => {
           //   const url = "#" + router.asPath.split("#").pop();
@@ -100,6 +110,11 @@ export default function Loader() {
         tl.call(
           () => {
             html.classList.remove("locked");
+            lenis?.start();
+            lenis?.scrollTo(0, {
+              immediate: true,
+              force: true,
+            });
           },
           undefined,
           1

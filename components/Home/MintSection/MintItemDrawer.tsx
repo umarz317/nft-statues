@@ -31,12 +31,12 @@ export default function MintItemDrawer() {
     const tl = gsap.timeline();
 
     if (isOpen) {
-      html?.classList.add("overflow-hidden");
+      html?.classList.add("locked");
 
       tl.to(bg, { opacity: 1 });
       tl.to(drawerRight, { x: "0%" }, 0);
     } else {
-      html?.classList.remove("overflow-hidden");
+      html?.classList.remove("locked");
       tl.to(drawerRight, { x: "100%" });
       tl.to(
         bg,

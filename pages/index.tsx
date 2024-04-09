@@ -109,15 +109,13 @@ export default function Home({
   return (
     <>
       <Head>
-        <title>NFT Statues</title>
+        <title>BASC Labs</title>
         <meta
           name="description"
           content="Just some statues, but on the blockchain."
         />
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:site_name" content="NFT Statues" />
-        <meta property="og:title" content="NFT Statues" />
-        {/* <meta property="og:url" content="https://sohub.digital" /> */}
+        <meta property="og:title" content="BASC Labs" />
         <meta property="og:type" content="website" />
         <meta
           property="og:description"
@@ -127,9 +125,9 @@ export default function Home({
           property="og:image"
           content="https://nft-statues.vercel.app/shareThumb.png"
         />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="nft statues" />
+        <meta property="og:image:width" content="1600" />
+        <meta property="og:image:height" content="900" />
+        <meta property="og:image:alt" content="basc labs" />
         <meta property="og:image:type" content="image/png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#ff3600" />

@@ -80,7 +80,7 @@ export const FaQ = defineType({
               },
             ],
           },
-        },
+        } as any,
       ],
     }),
   ],

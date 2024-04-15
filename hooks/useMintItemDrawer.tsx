@@ -14,6 +14,8 @@ export const MintItemDrawerContext = createContext({
   setWeight: (weight: number) => {},
   isOpen: false,
   setOpen: (open: boolean) => {},
+  isOpenMint: false,
+  setOpenMint: (open: boolean) => {},
 });
 
 export function useMintItemDrawer() {
@@ -31,6 +33,7 @@ export default function MintItemDrawerProvider({
   const [material, setMaterial] = useState("");
   const [weight, setWeight] = useState(0);
   const [isOpen, setOpen] = useState(false);
+  const [isOpenMint, setOpenMint] = useState(false);
 
   return (
     <MintItemDrawerContext.Provider
@@ -47,6 +50,8 @@ export default function MintItemDrawerProvider({
         setWeight,
         isOpen,
         setOpen,
+        isOpenMint,
+        setOpenMint,
       }}
     >
       {children}

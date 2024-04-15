@@ -16,12 +16,14 @@ export const WalletProvider: FC<Props> = ({ children }) => {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [nfts, setNfts] = useState<Nft[] | null>(null);
 
-  const getNfts = async () => {
-    if (walletAddress) {
-      const response: { data: { nfts: Nft[] } } = await fetch(
-        `/api/load-nfts?address=${walletAddress}`
-      ).then((res) => res.json());
-      setNfts(response.data.nfts);
+  const getNfts = async (address: string) => {
+    if (typeof window !== "undefined") {
+      if (address) {
+        const response: { data: { nfts: Nft[] } } = await fetch(
+          `${window.location.origin}/api/load-nfts?address=${address}`
+        ).then((res) => res.json());
+        setNfts(response.data.nfts);
+      }
     }
   };
 
@@ -35,7 +37,7 @@ export const WalletProvider: FC<Props> = ({ children }) => {
 
           console.log("Connected to MetaMask:", data[0]);
           setWalletAddress(data[0]);
-          await getNfts();
+          await getNfts(data[0]);
         } catch (error) {
           console.error("Error connecting to MetaMask:", error);
         }

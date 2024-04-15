@@ -35,10 +35,10 @@ export default function MintDrawer() {
       html?.classList.add("locked");
 
       tl.to(bg, { opacity: 1 });
-      tl.to(drawerRight, { scale: 1, opacity: 1 }, 0);
+      tl.to(drawerRight, { opacity: 1 }, 0);
     } else {
       html?.classList.remove("locked");
-      tl.to(drawerRight, { scale: 0, opacity: 0 });
+      tl.to(drawerRight, { opacity: 0 });
       tl.to(
         bg,
         {
@@ -89,35 +89,35 @@ export default function MintDrawer() {
           />
 
           <div className="w-full grid grid-cols-2 grid-rows-2 gap-9">
-            <div className="flex flex-col gap-[2px] items-center justify-center">
+            <div className="flex flex-col gap-[2px] items-center">
               <span className="block text-white text-2xl lg:text-2xl font-medium tracking-tighter">
                 {title}
               </span>
-              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter">
+              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter text-center">
                 {height} {height === 1 ? "Meter" : "Meters"} Height
               </span>
             </div>
-            <div className="flex flex-col gap-[2px] items-center justify-center">
+            <div className="flex flex-col gap-[2px] items-center">
               <span className="block text-white text-2xl lg:text-2xl font-medium tracking-tighter">
                 {title}
               </span>
-              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter">
+              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter text-center">
                 {material} Material
               </span>
             </div>
-            <div className="flex flex-col gap-[2px] items-center justify-center">
+            <div className="flex flex-col gap-[2px] items-center">
               <span className="block text-white text-2xl lg:text-2xl font-medium tracking-tighter">
                 {title}
               </span>
-              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter">
+              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter text-center">
                 {weight} {weight === 1 ? "Kilogram" : "Kilograms"} Weight
               </span>
             </div>
-            <div className="flex flex-col gap-[2px] items-center justify-center">
+            <div className="flex flex-col gap-[2px] items-center">
               <span className="block text-white text-2xl lg:text-2xl font-medium tracking-tighter">
                 {title}
               </span>
-              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter">
+              <span className="block text-white opacity-[.7] text-lg lg:text-lg font-normal tracking-tighter text-center">
                 {price} ETH Price
               </span>
             </div>
@@ -128,6 +128,20 @@ export default function MintDrawer() {
             className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
           >
             <span>Mint</span>
+            <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
+              <svg
+                width="100%"
+                viewBox="0 0 15 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.81607 0.945313L13.0742 6.20345L7.81607 11.4616M0.30443 6.20345L12.6986 6.20346"
+                  stroke="black"
+                  strokeWidth="1.50233"
+                />
+              </svg>
+            </span>
           </button>
         </div>
       </div>

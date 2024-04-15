@@ -35,10 +35,10 @@ export default function MintDrawer() {
       html?.classList.add("locked");
 
       tl.to(bg, { opacity: 1 });
-      tl.to(drawerRight, { x: "0%" }, 0);
+      tl.to(drawerRight, { scale: 1, opacity: 1 }, 0);
     } else {
       html?.classList.remove("locked");
-      tl.to(drawerRight, { x: "200%" });
+      tl.to(drawerRight, { scale: 0, opacity: 0 });
       tl.to(
         bg,
         {
@@ -60,7 +60,7 @@ export default function MintDrawer() {
       }}
       className="fixed left-0 top-0 z-[1000] w-full h-full mint-drawer-wrapper-popup"
     >
-      <div className="mint-drawer-popup-right translate-x-[100%] absolute z-10 h-full max-h-[500px] w-full max-w-[800px] mx-auto left-0 right-0 top-0 bottom-0 my-auto p-6 lg:p-8">
+      <div className="mint-drawer-popup-right absolute z-10 h-full max-h-[500px] w-full max-w-[800px] mx-auto left-0 right-0 top-0 bottom-0 my-auto p-6 lg:p-8">
         <div className="relative mint-drawer-popup-content w-full h-full bg-[#0F0F0F] rounded-[4rem] flex flex-col justify-between items-center p-6 lg:p-6">
           {/* <button
             onClick={() => setOpenMint(false)}
@@ -123,14 +123,17 @@ export default function MintDrawer() {
             </div>
           </div>
 
-          <button className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2">
+          <button
+            onClick={() => setOpenMint(false)}
+            className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
+          >
             <span>Mint</span>
           </button>
         </div>
       </div>
       <div
         onClick={() => setOpenMint(false)}
-        className="absolute  inset-0 bg-black/30 backdrop-blur-2xl opacity-0 mint-drawer-popup-bg z-0"
+        className="absolute inset-0 bg-black/30 backdrop-blur-2xl opacity-0 mint-drawer-popup-bg z-0"
       />
     </div>
   );

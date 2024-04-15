@@ -1,7 +1,9 @@
+import { useWalletContext } from "@/contexts/wallet";
 import { bebas } from "@/pages/_app";
 import { useLenis } from "@studio-freight/react-lenis";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 function NavItem({ href, text }: { href: string; text: string }) {
   const lenis = useLenis(() => {});
@@ -19,7 +21,10 @@ function NavItem({ href, text }: { href: string; text: string }) {
   );
 }
 
-export default function Nav({}) {
+export default function Nav() {
+  const { handleMetamaskConnection, walletAddress, nfts } = useWalletContext();
+  console.log(walletAddress, nfts);
+
   return (
     <div className="fixed nav-wrapper z-[999] left-0 top-0 w-full px-4 lg:px-20 pt-8 -translate-y-[100%]">
       <div className="w-full backdrop-blur-lg relative rounded-full bg-[#1E1E1E]/50 py-6 lg:py-8 px-8 lg:px-16 flex flex-row items-center justify-between">
@@ -40,12 +45,17 @@ export default function Nav({}) {
           <NavItem href="#mint" text="Mint" />
           <NavItem href="#faq" text="FAQ" />
         </nav>
-        <Link
-          href="/"
-          className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter"
-        >
-          Connect Wallet
-        </Link>
+        {walletAddress ? (
+          <div className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter">{walletAddress?.slice(0, 6) + "..." + walletAddress?.slice(38)}</div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleMetamaskConnection}
+            className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter"
+          >
+            Connect Wallet
+          </button>
+        )}
       </div>
     </div>
   );

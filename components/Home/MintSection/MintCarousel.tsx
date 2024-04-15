@@ -25,8 +25,15 @@ function MintItem({
   weight: number;
 }) {
   const titleWithoutSpaces = title.replace(/\s/g, "");
-  const { setTitle, setHeight, setPrice, setMaterial, setWeight, setOpen } =
-    useMintItemDrawer();
+  const {
+    setTitle,
+    setHeight,
+    setPrice,
+    setMaterial,
+    setWeight,
+    setOpen,
+    setOpenMint,
+  } = useMintItemDrawer();
   return (
     <>
       <div
@@ -42,7 +49,17 @@ function MintItem({
             {price} ETH
           </span>
           <div className="flex flex-col lg:flex-row items-center gap-3 select-none w-full lg:w-fit">
-            <button className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2">
+            <button
+              onClick={() => {
+                setTitle(title);
+                setHeight(height);
+                setPrice(price);
+                setMaterial(material);
+                setWeight(weight);
+                setOpenMint(true);
+              }}
+              className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2"
+            >
               <span>Mint</span>
               <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
                 <svg

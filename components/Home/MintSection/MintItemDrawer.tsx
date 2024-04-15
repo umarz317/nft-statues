@@ -37,7 +37,7 @@ export default function MintItemDrawer() {
       tl.to(drawerRight, { x: "0%" }, 0);
     } else {
       html?.classList.remove("locked");
-      tl.to(drawerRight, { x: "200%" });
+      tl.to(drawerRight, { x: "100%" });
       tl.to(
         bg,
         {
@@ -59,7 +59,7 @@ export default function MintItemDrawer() {
       }}
       className="fixed left-0 top-0 z-[1000] w-full h-full mint-drawer-wrapper"
     >
-      <div className="mint-drawer-right translate-x-[100%] absolute z-10 h-full w-full lg:w-[40%] mx-auto left-0 right-0 top-0 p-6 lg:p-8">
+      <div className="mint-drawer-right translate-x-[100%] absolute z-10 h-full w-full lg:w-[40%] right-0 top-0 p-6 lg:p-8">
         <div className="relative mint-drawer-content w-full h-full bg-white rounded-3xl flex flex-col justify-between p-6 lg:p-16">
           <button
             onClick={() => setOpen(false)}

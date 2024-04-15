@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import { Lenis } from "@studio-freight/react-lenis";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
+import MintDrawer from "./Home/MintSection/MintDrawer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -36,6 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }}
       >
         <MintItemDrawer />
+        <MintDrawer />
         {!isSanity && <Loader />}
         {!isSanity && <Nav />}
         {children}

@@ -2,6 +2,7 @@ import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
 import { gsap } from "@/lib/gsap";
 import { useEffect } from "react";
+import { useLenis } from "@studio-freight/react-lenis";
 
 function DetailItem({ title, value }: { title: string; value: string }) {
   return (
@@ -19,6 +20,7 @@ function DetailItem({ title, value }: { title: string; value: string }) {
 export default function MintItemDrawer() {
   const { title, height, price, material, weight, isOpen, setOpen } =
     useMintItemDrawer();
+  const lenis = useLenis(() => {});
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -32,11 +34,12 @@ export default function MintItemDrawer() {
 
     if (isOpen) {
       html?.classList.add("locked");
-
+      lenis?.stop();
       tl.to(bg, { opacity: 1 });
       tl.to(drawerRight, { x: "0%" }, 0);
     } else {
       html?.classList.remove("locked");
+      lenis?.start();
       tl.to(drawerRight, { x: "100%" });
       tl.to(
         bg,
@@ -50,7 +53,7 @@ export default function MintItemDrawer() {
     return () => {
       tl.kill();
     };
-  }, [isOpen]);
+  }, [isOpen, lenis]);
 
   return (
     <div

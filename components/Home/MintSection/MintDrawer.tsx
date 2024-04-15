@@ -3,23 +3,12 @@ import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
 import { gsap } from "@/lib/gsap";
 import { useEffect } from "react";
 import Image from "next/image";
-
-function DetailItem({ title, value }: { title: string; value: string }) {
-  return (
-    <div className="w-full flex flex-row items-end justify-between pb-4 border-b-[1px] border-[#A0A0A0]">
-      <span className="text-black font-medium tracking-tighter text-xl lg:text-3xl">
-        {title}
-      </span>
-      <span className="text-[#A0A0A0] font-medium tracking-tighter text-xl lg:text-3xl">
-        {value}
-      </span>
-    </div>
-  );
-}
+import { useLenis } from "@studio-freight/react-lenis";
 
 export default function MintDrawer() {
   const { title, height, price, material, weight, isOpenMint, setOpenMint } =
     useMintItemDrawer();
+  const lenis = useLenis(() => {});
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -33,11 +22,12 @@ export default function MintDrawer() {
 
     if (isOpenMint) {
       html?.classList.add("locked");
-
+      lenis?.stop();
       tl.to(bg, { opacity: 1 });
       tl.to(drawerRight, { opacity: 1 }, 0);
     } else {
       html?.classList.remove("locked");
+      lenis?.start();
       tl.to(drawerRight, { opacity: 0 });
       tl.to(
         bg,
@@ -51,7 +41,7 @@ export default function MintDrawer() {
     return () => {
       tl.kill();
     };
-  }, [isOpenMint]);
+  }, [isOpenMint, lenis]);
 
   return (
     <div
@@ -81,7 +71,7 @@ export default function MintDrawer() {
             </svg>
           </button> */}
           <Image
-            src="/favicon.ico"
+            src="/static/images/white-jimbo.svg"
             width={55}
             height={55}
             alt="Jimbo"

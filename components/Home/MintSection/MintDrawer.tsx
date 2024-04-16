@@ -24,11 +24,11 @@ export default function MintDrawer() {
       html?.classList.add("locked");
       lenis?.stop();
       tl.to(bg, { opacity: 1 });
-      tl.to(drawerRight, { opacity: 1 }, 0);
+      tl.to(drawerRight, { x: "0%" }, 0);
     } else {
       html?.classList.remove("locked");
       lenis?.start();
-      tl.to(drawerRight, { opacity: 0 });
+      tl.to(drawerRight, { x: "100%" });
       tl.to(
         bg,
         {
@@ -50,7 +50,7 @@ export default function MintDrawer() {
       }}
       className="fixed left-0 top-0 z-[1000] w-full h-full mint-drawer-wrapper-popup"
     >
-      <div className="mint-drawer-popup-right absolute z-10 h-full max-h-[550px] sm:max-h-[718px] w-full max-w-[589px] mx-auto left-0 right-0 top-0 bottom-0 my-auto p-6 sm:p-8">
+      <div className="mint-drawer-popup-right absolute z-10 h-full max-h-[600px] sm:max-h-[718px] w-full max-w-[589px] right-0 top-0 bottom-0 my-auto p-6 sm:p-8">
         <div className="relative mint-drawer-popup-content rounded-3xl w-full h-full bg-[#0B0B0B] bg-center bg-no-repeat bg-contain flex flex-col justify-center items-center p-2 sm:p-6">
           <div className="angles z-10">
             <svg
@@ -156,7 +156,7 @@ export default function MintDrawer() {
           </div>
           <button
             onClick={() => setOpenMint(false)}
-            className="absolute right-2 top-2 w-7 sm:w-10 h-7 sm:h-10 bg-[#191919] rounded-full z-10 flex items-center justify-center text-[#717171] hover:scale-105 transition-transform duration-300 ease-out"
+            className="absolute right-2 top-2 w-9 sm:w-10 h-9 sm:h-10 bg-[#191919] rounded-full z-10 flex items-center justify-center text-[#717171] hover:scale-105 transition-transform duration-300 ease-out"
           >
             <svg
               width="30%"
@@ -212,8 +212,8 @@ export default function MintDrawer() {
             </div>
           </div>
 
-          <div className="w-full flex items-center justify-between px-6 mt-[44px] mb-[26px]">
-            <button className="md:w-[52px] w-[30px] md:h-[52px] h-[30px] bg-[url(/static/images/mint-popup-arrow.png)] bg-center bg-no-repeat bg-cover hover:scale-105 transition-transform duration-300 ease-out"></button>
+          <div className="w-full flex items-center justify-center px-6 mt-[44px] mb-[26px]">
+            {/* <button className="md:w-[52px] w-[30px] md:h-[52px] h-[30px] bg-[url(/static/images/mint-popup-arrow.png)] bg-center bg-no-repeat bg-cover hover:scale-105 transition-transform duration-300 ease-out"></button> */}
             <div className="flex flex-col items-center justify-center gap-2">
               <span className="block text-white text-2xl lg:text-4xl font-medium tracking-tighter">
                 {title}
@@ -222,12 +222,12 @@ export default function MintDrawer() {
                 {price} ETH Price
               </span>
             </div>
-            <button className="md:w-[52px] w-[30px] md:h-[52px] h-[30px] bg-[url(/static/images/mint-popup-arrow.png)] bg-center bg-no-repeat bg-cover transform rotate-180 hover:scale-105 transition-transform duration-300 ease-out"></button>
+            {/* <button className="md:w-[52px] w-[30px] md:h-[52px] h-[30px] bg-[url(/static/images/mint-popup-arrow.png)] bg-center bg-no-repeat bg-cover transform rotate-180 hover:scale-105 transition-transform duration-300 ease-out"></button> */}
           </div>
 
           <button
             onClick={() => setOpenMint(false)}
-            className="w-[80%] mt-3 lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
+            className="w-[80%] mt-6 lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
           >
             <span>Mint</span>
             <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">

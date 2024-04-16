@@ -94,7 +94,7 @@ const socials = [
         />
       </svg>
     ),
-    link: "https://discord.1upnova.com/",
+    link: "https://discord.gg/kbknvctuc3",
   },
 ];
 

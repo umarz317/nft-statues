@@ -11,6 +11,7 @@ import { groq } from "next-sanity";
 import { sanityClient } from "@/lib/sanity/sanityClient";
 import Marquee from "@/components/Marquee";
 import FaQSection from "@/components/Home/FaQSection";
+import BuyNowSection from "@/components/Home/BuyNow";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -145,15 +146,40 @@ export default function Home({
           text2="Turn your digital asset into your real life statue"
         />
         <UtilitySection />
+        <Marquee
+          identifier="buy-marq"
+          className="rotate-[-2.5deg] py-16 lg:py-32"
+          text1="Entering Buy now section"
+          text2="Keep scrolling"
+        />
+        <BuyNowSection />
+        <Marquee
+          identifier="work-marq"
+          className="rotate-[2.5deg]  py-16 lg:py-24"
+          text1="Entering work section"
+          text2="Keep scrolling"
+        />
         <WorkSection works={works} />
         <Marquee
           identifier="roadmap-marq"
-          className="rotate-[-2.5deg] py-32"
+          className="rotate-[-2.5deg]  py-16 lg:py-32"
           text1="Entering roadmap section"
           text2="Keep scrolling"
         />
         <RoadmapSection />
+        <Marquee
+          identifier="mint-marq"
+          className="rotate-[2.5deg]  py-16 lg:py-24"
+          text1="Entering mint section"
+          text2="Keep scrolling"
+        />
         <MintSection statues={statues} />
+        <Marquee
+          identifier="faq-marq"
+          className="rotate-[-2.5deg]  py-16 lg:py-24"
+          text1="Entering faq section"
+          text2="Keep scrolling"
+        />
         <FaQSection faqs={faqs} />
         <div className="w-full flex flex-col items-center py-24 gap-8">
           <div className="socials-btns flex flex-row items-center gap-6">

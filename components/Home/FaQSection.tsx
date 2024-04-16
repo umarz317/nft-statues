@@ -84,7 +84,7 @@ function FaQItem({
 
 export default function FaQSection({ faqs }: { faqs: any[] }) {
   return (
-    <section className="faq-section pt-64 pb-[15vh] w-screen relative flex flex-col items-center">
+    <section className="faq-section pt-12 lg:pt-24 pb-[15vh] w-screen relative flex flex-col items-center">
       <div id="faq" className="absolute top-0 -mt-32 h-32" />
       <SectionHeader
         title={<>FAQ</>}

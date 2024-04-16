@@ -14,6 +14,10 @@ export default function Loader() {
     const html = document.querySelector("html") as HTMLElement;
 
     lenis?.stop();
+    lenis?.scrollTo(0, {
+      immediate: true,
+      force: true,
+    });
     const tl = gsap.timeline({
       delay: 0.1,
     });
@@ -44,6 +48,7 @@ export default function Loader() {
       onComplete: () => {
         const tl = gsap.timeline({
           onStart: () => {
+            window.scrollTo(0, 0);
             lenis?.scrollTo(0, {
               immediate: true,
               force: true,

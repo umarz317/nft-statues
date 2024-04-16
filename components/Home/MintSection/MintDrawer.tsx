@@ -51,7 +51,109 @@ export default function MintDrawer() {
       className="fixed left-0 top-0 z-[1000] w-full h-full mint-drawer-wrapper-popup"
     >
       <div className="mint-drawer-popup-right absolute z-10 h-full max-h-[718px] w-full max-w-[589px] mx-auto left-0 right-0 top-0 bottom-0 my-auto p-6 lg:p-8">
-        <div className="relative mint-drawer-popup-content w-full h-full bg-[url(/static/images/mint-popupBG.png)] bg-center bg-no-repeat bg-contain flex flex-col justify-center items-center p-6 lg:p-6 overflow-hidden">
+        <div className="relative mint-drawer-popup-content rounded-3xl w-full h-full bg-[#0B0B0B] bg-center bg-no-repeat bg-contain flex flex-col justify-center items-center p-6 lg:p-6">
+          <div className="angles z-10">
+            <svg
+              width="12"
+              height="12"
+              className="absolute -top-2 -left-2 z-10"
+              viewBox="0 0 8 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="0.507099"
+                y1="2.21659e-08"
+                x2="0.507099"
+                y2="7.60648"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+              <line
+                x1="7.60938"
+                y1="0.507099"
+                x2="0.00289154"
+                y2="0.507099"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+            </svg>
+            <svg
+              width="12"
+              height="12"
+              className="absolute -bottom-2 -left-2 -rotate-90"
+              viewBox="0 0 8 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="0.507099"
+                y1="2.21659e-08"
+                x2="0.507099"
+                y2="7.60648"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+              <line
+                x1="7.60938"
+                y1="0.507099"
+                x2="0.00289154"
+                y2="0.507099"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+            </svg>
+            <svg
+              width="12"
+              height="12"
+              className="absolute -bottom-2 -right-2 scale-[-1]"
+              viewBox="0 0 8 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="0.507099"
+                y1="2.21659e-08"
+                x2="0.507099"
+                y2="7.60648"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+              <line
+                x1="7.60938"
+                y1="0.507099"
+                x2="0.00289154"
+                y2="0.507099"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+            </svg>
+            <svg
+              width="12"
+              height="12"
+              className="absolute -top-2 -right-2 rotate-90"
+              viewBox="0 0 8 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="0.507099"
+                y1="2.21659e-08"
+                x2="0.507099"
+                y2="7.60648"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+              <line
+                x1="7.60938"
+                y1="0.507099"
+                x2="0.00289154"
+                y2="0.507099"
+                stroke="#FF3600"
+                strokeWidth="1.0142"
+              />
+            </svg>
+          </div>
           {/* <button
             onClick={() => setOpenMint(false)}
             className="absolute right-6 top-6 w-10 h-10 bg-[#1F1F1F]/70 rounded-full z-10 flex items-center justify-center text-white"
@@ -112,11 +214,11 @@ export default function MintDrawer() {
 
           <div className="w-full flex items-center justify-between px-6 mt-[44px] mb-[26px]">
             <button className="w-[52px] h-[52px] bg-[url(/static/images/mint-popup-arrow.png)] bg-center bg-no-repeat bg-cover hover:scale-105 transition-transform duration-300 ease-out"></button>
-            <div className="flex flex-col items-center justify-center gap-3">
-              <span className="block text-white text-2xl lg:text-[57px] font-medium tracking-tighter">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <span className="block text-white text-2xl lg:text-4xl font-medium tracking-tighter">
                 {title}
               </span>
-              <span className="block text-white opacity-[.4] text-lg lg:text-[28px] font-normal tracking-tighter text-center">
+              <span className="block text-white opacity-[.4] text-lg lg:text-xl font-normal tracking-tighter text-center">
                 {price} ETH Price
               </span>
             </div>
@@ -125,7 +227,7 @@ export default function MintDrawer() {
 
           <button
             onClick={() => setOpenMint(false)}
-            className="w-[80%] lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
+            className="w-[80%] mt-3 lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-bold text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
           >
             <span>Mint</span>
             <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">

@@ -58,7 +58,7 @@ export default function RoadmapSection() {
     );
   }, []);
   return (
-    <section className="roadmap-section pt-16 w-screen relative flex flex-col items-center pb-24">
+    <section className="roadmap-section pt-8 lg:pt-16 w-screen relative flex flex-col items-center pb-24">
       <div id="roadmap" className="absolute top-0 -mt-32 h-32" />
       <SectionHeader
         title={<>ROADMAP</>}

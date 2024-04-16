@@ -106,7 +106,7 @@ export default function HeroSection({}) {
         alt=""
         className="w-full lg:w-auto hero-stat scale-90 max-w-[90%] object-contain object-bottom lg:h-[85%] z-[1]"
       />
-      <div className="absolute z-[4] bottom-[10%] text-xl flex flex-col items-center gap-4">
+      <div className="absolute z-[4] bottom-[15%] text-xl flex flex-col items-center gap-4">
         <button
           style={{
             boxShadow: "0px 0px 20px 5px rgba(255,54,0,0.42)",

@@ -13,7 +13,7 @@ export default function HeroSection({}) {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const countDownDate = new Date("Apr 24, 2024 14:00:00").getTime();
+  const countDownDate = new Date("Apr 20, 2024 16:20:00").getTime();
 
   function updateDays() {
     var now = new Date().getTime();

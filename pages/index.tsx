@@ -12,12 +12,14 @@ import { sanityClient } from "@/lib/sanity/sanityClient";
 import Marquee from "@/components/Marquee";
 import FaQSection from "@/components/Home/FaQSection";
 import BuyNowSection from "@/components/Home/BuyNow";
+import TeamSection from "@/components/Home/TeamSection";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const statuesQuery = groq`*[_type == 'statue'] | order(orderRank)`;
 const faqQuery = groq`*[_type == 'faq'] | order(orderRank)`;
 const worksQuery = groq`*[_type == 'works'] | order(orderRank)`;
+const teamMembersQuery = groq`*[_type == 'teamMembers'] | order(orderRank)`;
 
 const socials = [
   {
@@ -102,10 +104,12 @@ export default function Home({
   statues,
   faqs,
   works,
+  teamMembers,
 }: {
   statues: any[];
   faqs: any[];
   works: any[];
+  teamMembers: any[];
 }) {
   return (
     <>
@@ -175,8 +179,15 @@ export default function Home({
         />
         <MintSection statues={statues} />
         <Marquee
-          identifier="faq-marq"
+          identifier="team-marq"
           className="rotate-[-2.5deg]  py-16 lg:py-24"
+          text1="Entering team section"
+          text2="Keep scrolling"
+        />
+        <TeamSection teamMembers={teamMembers} />
+        <Marquee
+          identifier="faq-marq"
+          className="rotate-[2.5deg]  py-16 lg:py-24"
           text1="Entering faq section"
           text2="Keep scrolling"
         />
@@ -207,12 +218,14 @@ export async function getStaticProps() {
   const statues = await sanityClient.fetch(statuesQuery);
   const faqs = await sanityClient.fetch(faqQuery);
   const works = await sanityClient.fetch(worksQuery);
+  const teamMembers = await sanityClient.fetch(teamMembersQuery);
 
   return {
     props: {
       statues,
       faqs,
       works,
+      teamMembers,
     },
     revalidate: 1,
   };

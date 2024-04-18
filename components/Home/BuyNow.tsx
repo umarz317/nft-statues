@@ -15,7 +15,7 @@ export default function BuyNowSection() {
           </>
         }
       />
-      <div className="mt-10 flex flex-col items-center w-full px-4 lg:px-24 gap-12">
+      <div className="mt-10 flex flex-col items-center w-full px-4 lg:px-24 gap-12 lg:gap-24">
         <Image
           src="/static/images/bascStone.png"
           width={379}
@@ -23,6 +23,14 @@ export default function BuyNowSection() {
           alt=""
           className="max-w-[50%]"
         />
+        <button
+          style={{
+            boxShadow: "0px 0px 20px 5px rgba(255,54,0,0.42)",
+          }}
+          className="uppercase hover:scale-105 transition-transform duration-300 ease-out  rounded-full text-black tracking-tighter font-semibold text-lg lg:text-2xl px-10 lg:px-16 py-3 lg:py-4 bg-[#FF3600]"
+        >
+          Buy Now
+        </button>
       </div>
     </section>
   );

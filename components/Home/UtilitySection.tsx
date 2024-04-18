@@ -153,7 +153,7 @@ function TextBox({
       >
         {title}
       </span>
-      <p className="text-[#A0A0A0] leading-tight lg:leading-normal text-base lg:text-lg 3xl:text-xl font-semibold tracking-tighter">
+      <p className="text-[#A0A0A0] leading-tight lg:leading-normal text-base lg:text-lg 3xl:text-xl font-medium tracking-tighter">
         {text}
       </p>
     </div>
@@ -165,7 +165,7 @@ export default function UtilitySection() {
     <section className="utility-section pt-32 lg:pt-64 w-screen relative lg:min-h-screen pb-16 lg:pb-32">
       <div id="utility" className="absolute top-0 -mt-44 h-32" />
       <SectionHeader
-        title={<>WHAT DO YOU GET?</>}
+        title={<>Founders Collection</>}
         description={
           <>
             We have partnered with the best statue and art makers in the region.

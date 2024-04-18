@@ -106,3 +106,33 @@ export const works = defineType({
     }),
   ],
 });
+
+export const teamMembers = defineType({
+  name: "teamMembers",
+  title: "Team Members",
+  type: "document",
+  orderings: [orderRankOrdering],
+  fields: [
+    defineField({
+      name: "name",
+      title: "Name",
+      type: "string",
+    }),
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+    }),
+    orderRankField({ type: "teamMembers" }),
+    defineField({
+      name: "image",
+      title: "Image",
+      type: "image",
+    }),
+    defineField({
+      name: "twitterLink",
+      title: "Twitter Link",
+      type: "url",
+    }),
+  ],
+});

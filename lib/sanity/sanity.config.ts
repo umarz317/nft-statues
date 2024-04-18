@@ -1,7 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list";
-import { FaQ, statue, works } from "./schemaTypes";
+import { FaQ, statue, teamMembers, works } from "./schemaTypes";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
@@ -14,7 +14,7 @@ export default defineConfig({
 
   plugins: [
     structureTool({
-      structure: ({ S, context }: any) => {
+      structure: (S: any, context: any) => {
         return S.list()
           .title("Content")
           .items([
@@ -44,12 +44,20 @@ export default defineConfig({
               S,
               context,
             }),
+            orderableDocumentListDeskItem({
+              type: "teamMembers",
+              title: "Team Members",
+              // pass from the structure callback params above
+
+              S,
+              context,
+            }),
           ]);
       },
     }),
   ],
 
   schema: {
-    types: [statue, FaQ, works],
+    types: [statue, FaQ, works, teamMembers],
   },
 });

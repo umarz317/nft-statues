@@ -88,20 +88,22 @@ export default function MintItemDrawer() {
           <div className="flex flex-col details gap-4">
             <DetailItem
               title="Height"
-              value={`${height} ${height === 1 ? "Meter" : "Meters"}`}
+              value={`${height} ${height === 1 ? "Meter" : "Meters"} (approx)`}
             />
             {/* <DetailItem key="Price" value={`${price} ETH`} /> */}
             <DetailItem title="Material" value={material} />
             <DetailItem
               title="Weight"
-              value={`${weight} ${weight === 1 ? "Kilogram" : "Kilograms"}`}
+              value={`${weight} ${
+                weight === 1 ? "Kilogram" : "Kilograms"
+              } (approx)`}
             />
           </div>
           <div>
             <span className="block text-black font-semibold tracking-tighter text-2xl lg:text-3xl">
               Shipping
             </span>
-            <p className="text-[#A0A0A0] mt-4 font-medium tracking-tighter text-xl lg:text-2xl">
+            <p className="text-[#A0A0A0] mt-4 font-normal tracking-tighter text-xl lg:text-2xl">
               All physical statues will be shipped as soon as completed. Once
               you forge your statue you will get an email that will confirm the
               estimated delivery.

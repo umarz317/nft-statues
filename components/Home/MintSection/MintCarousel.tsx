@@ -38,7 +38,7 @@ function MintItem({
     <>
       <div
         id={titleWithoutSpaces}
-        className="mint-item relative w-full lg:aspect-square h-auto bg-[#0F0F0F] rounded-3xl p-6 lg:p-8 flex flex-col justify-between"
+        className="mint-item relative w-full lg:aspect-square h-auto bg-transparent p-6 lg:p-8 flex flex-col justify-between"
       >
         <div className="order-1 w-full flex flex-col">
           <span className="block text-white text-2xl lg:text-3xl">{title}</span>
@@ -85,7 +85,7 @@ function MintItem({
                 setWeight(weight);
                 setOpen(true);
               }}
-              className="w-full  lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
+              className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
             >
               <span>Details</span>
               <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
@@ -107,13 +107,13 @@ function MintItem({
         </div>
         <Image
           src={imageSRC}
-          width={600}
-          height={600}
-          style={{
-            WebkitMaskImage:
-              "linear-gradient(to bottom, black 0%, black 10%, transparent 100%)",
-          }}
-          className="order-3 mt-6 lg:mt-0 w-full z-0 h-[80%] lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 object-contain rounded-xl"
+          width={1200}
+          height={1200}
+          // style={{
+          //   WebkitMaskImage:
+          //     "linear-gradient(to bottom, black 0%, black 10%, transparent 100%)",
+          // }}
+          className="order-3 mt-6 lg:mt-0 w-full z-0 h-full lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 object-contain rounded-xl lg:rounded-3xl"
           alt={title + "Statue"}
         />
       </div>

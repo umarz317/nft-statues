@@ -162,7 +162,7 @@ function TextBox({
 
 export default function UtilitySection() {
   return (
-    <section className="utility-section pt-32 lg:pt-64 w-screen relative lg:min-h-screen pb-16 lg:pb-32">
+    <section className="utility-section pt-32 lg:pt-64 w-screen relative pb-16 lg:pb-24">
       <div id="utility" className="absolute top-0 -mt-44 h-32" />
       <SectionHeader
         title={<>Founders Collection</>}

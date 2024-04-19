@@ -166,7 +166,7 @@ export default function Home({
         <WorkSection works={works} />
         <Marquee
           identifier="roadmap-marq"
-          className="rotate-[-2.5deg]  py-16 lg:py-32"
+          className="rotate-[-2.5deg]  py-16 lg:py-44"
           text1="Entering roadmap section"
           text2="Keep scrolling"
         />
@@ -180,14 +180,14 @@ export default function Home({
         <MintSection statues={statues} />
         <Marquee
           identifier="team-marq"
-          className="rotate-[-2.5deg]  py-16 lg:py-24"
+          className="rotate-[-2.5deg]  py-16 lg:py-44"
           text1="Entering team section"
           text2="Keep scrolling"
         />
         <TeamSection teamMembers={teamMembers} />
         <Marquee
           identifier="faq-marq"
-          className="rotate-[2.5deg]  py-16 lg:py-24"
+          className="rotate-[2.5deg]  py-16 lg:py-44"
           text1="Entering faq section"
           text2="Keep scrolling"
         />

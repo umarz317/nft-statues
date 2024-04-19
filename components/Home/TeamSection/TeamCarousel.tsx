@@ -21,10 +21,10 @@ function TeamItem({
   imageSRC: string;
 }) {
   return (
-    <div className="team-item relative w-full">
-      <div className="absolute z-10 w-full p-8 bottom-0 left-0 flex flex-row items-end justify-between">
+    <div className="team-item select-none relative w-full">
+      <div className="absolute z-10 w-full h-full p-4 lg:p-8 bottom-0 left-0 flex flex-row items-end justify-between">
         <div className="flex flex-col">
-          <span className="text-lg lg:text-2xl font-medium text-[#676767] tracking-tighter">
+          <span className="text-lg lg:text-2xl font-medium text-[#ababab] tracking-tighter">
             {title}
           </span>
           <span
@@ -34,25 +34,27 @@ function TeamItem({
             {name}
           </span>
         </div>
-        <Link
-          className="size-16 hover:scale-110 transition-transform duration-200 ease-out bg-[#FFFFFF] rounded-full flex items-center justify-center"
-          href={twitterLink}
-          target="_blank"
-        >
-          <span className="w-6 block">
-            <svg
-              width="100%"
-              viewBox="0 0 21 21"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0.653726 0.914062L8.29557 11.4906L0.605469 20.0898H2.3362L9.06887 12.5611L14.5087 20.0898H20.3984L12.3266 8.91835L19.4845 0.914062H17.7538L11.5533 7.84787L6.54347 0.914062H0.653726ZM3.1989 2.23368H5.90466L17.8529 18.77H15.1471L3.1989 2.23368Z"
-                fill="currentColor"
-              />
-            </svg>
-          </span>
-        </Link>
+        {twitterLink && (
+          <Link
+            className="size-10 right-4 top-4 lg:size-16 absolute lg:relative hover:scale-110 transition-transform duration-200 ease-out bg-[#FFFFFF] rounded-full flex items-center justify-center"
+            href={twitterLink}
+            target="_blank"
+          >
+            <span className="w-4 lg:w-6 block">
+              <svg
+                width="100%"
+                viewBox="0 0 21 21"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0.653726 0.914062L8.29557 11.4906L0.605469 20.0898H2.3362L9.06887 12.5611L14.5087 20.0898H20.3984L12.3266 8.91835L19.4845 0.914062H17.7538L11.5533 7.84787L6.54347 0.914062H0.653726ZM3.1989 2.23368H5.90466L17.8529 18.77H15.1471L3.1989 2.23368Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </Link>
+        )}
       </div>
 
       <div className="absolute left-0 bottom-0 h-1/2 w-full bg-gradient-to-t from-black/50 to-transparent" />

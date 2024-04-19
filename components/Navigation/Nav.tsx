@@ -40,13 +40,17 @@ export default function Nav() {
         <nav className="absolute left-1/2 -translate-x-1/2 hidden lg:flex flex-row items-center gap-16">
           <NavItem href="#nft" text="NFT" />
           <NavItem href="#utility" text="Utility" />
+          <NavItem href="#buy" text="Buy" />
           <NavItem href="#work" text="Work" />
           <NavItem href="#roadmap" text="Roadmap" />
           <NavItem href="#mint" text="Mint" />
+          <NavItem href="#team" text="Team" />
           <NavItem href="#faq" text="FAQ" />
         </nav>
         {walletAddress ? (
-          <div className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter">{walletAddress?.slice(0, 6) + "..." + walletAddress?.slice(38)}</div>
+          <div className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter">
+            {walletAddress?.slice(0, 6) + "..." + walletAddress?.slice(38)}
+          </div>
         ) : (
           <button
             type="button"

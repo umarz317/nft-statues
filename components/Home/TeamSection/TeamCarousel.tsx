@@ -24,19 +24,19 @@ function TeamItem({
     <div className="team-item select-none relative w-full">
       <div className="absolute z-10 w-full h-full p-4 lg:p-8 bottom-0 left-0 flex flex-row items-end justify-between">
         <div className="flex flex-col">
-          <span className="text-lg lg:text-2xl font-medium text-[#ababab] tracking-tighter">
+          <span className="text-lg lg:text-xl font-medium text-[#ababab] tracking-tighter">
             {title}
           </span>
           <span
             style={bebas.style}
-            className="text-4xl lg:text-7xl font-medium text-white -mb-3"
+            className="text-3xl lg:text-6xl font-medium text-white -mb-3"
           >
             {name}
           </span>
         </div>
         {twitterLink && (
           <Link
-            className="size-10 right-4 top-4 lg:size-16 absolute lg:relative hover:scale-110 transition-transform duration-200 ease-out bg-[#FFFFFF] rounded-full flex items-center justify-center"
+            className="size-10 right-4 lg:right-0 top-4 lg:top-0 lg:size-16 absolute lg:relative hover:scale-110 transition-transform duration-200 ease-out bg-[#FFFFFF] rounded-full flex items-center justify-center"
             href={twitterLink}
             target="_blank"
           >
@@ -57,7 +57,7 @@ function TeamItem({
         )}
       </div>
 
-      <div className="absolute left-0 bottom-0 h-1/2 w-full bg-gradient-to-t from-black/50 to-transparent" />
+      <div className="absolute left-0 bottom-0 h-[70%] w-full bg-gradient-to-t from-black/80 to-transparent" />
       <Image
         src={imageSRC}
         width={600}

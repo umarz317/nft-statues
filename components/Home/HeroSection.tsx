@@ -8,6 +8,7 @@ import { useLenis } from "@studio-freight/react-lenis";
 export default function HeroSection({}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const hoverRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis(()=>{});
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -108,19 +109,22 @@ export default function HeroSection({}) {
       />
       <div className="absolute z-[4] bottom-[15%] text-xl flex flex-col items-center gap-4">
         <button
+          onClick={()=>{
+            lenis?.scrollTo("#mint");
+          }}
           style={{
             boxShadow: "0px 0px 20px 5px rgba(255,54,0,0.42)",
-            opacity: !isTimerOver ? 0.5 : 1,
-            cursor: !isTimerOver ? "not-allowed" : "pointer",
-            transform: !isTimerOver ? "scale(1) !important" : "",
+            //opacity: !isTimerOver ? 0.5 : 1,
+            //cursor: !isTimerOver ? "not-allowed" : "pointer",
+            //transform: !isTimerOver ? "scale(1) !important" : "",
           }}
           className="uppercase hover:scale-105 transition-transform duration-300 ease-out  rounded-full text-black tracking-tighter font-semibold text-lg lg:text-2xl px-10 lg:px-16 py-3 lg:py-4 bg-[#FF3600]"
         >
-          {!isTimerOver ? "Mint Soon" : "Mint now"}
+          Mint now
         </button>
-        <span className="text-white">
+        {/*<span className="text-white">
           {days}d {hours}h {minutes}m {seconds}s
-        </span>
+        </span>*/}
       </div>
       <div
         ref={cardRef}

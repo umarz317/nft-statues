@@ -1,10 +1,13 @@
 import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
 import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
 import { gsap } from "@/lib/gsap";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useLenis } from "@studio-freight/react-lenis";
 import { urlFor } from "@/lib/sanity/sanityClient";
+import { mint,formatErrorMessages } from "@/lib/mint";
+import { usePublicClient, useWriteContract } from "wagmi";
+import { NFTPrices } from "@/lib/constants";
 
 export default function MintDrawer() {
   const {
@@ -25,6 +28,27 @@ export default function MintDrawer() {
   } = useMintItemDrawer();
   const lenis = useLenis(() => {});
 
+  //mint functionality
+  const [currentSelectedStatue,setCurrentSelectedStatue] = useState<number>(-1);
+  const { writeContractAsync } = useWriteContract();
+  const client = usePublicClient();
+
+  async function mintNFT(){
+    console.log('minting...',currentSelectedStatue)
+    if(currentSelectedStatue === -1){
+      alert("Please select a statue");
+      return;
+    }
+    try {
+      const res = await mint(client,writeContractAsync , (3-currentSelectedStatue).toString(), NFTPrices[currentSelectedStatue.toString()], false);
+      if (res === "success") alert("Minting successful");
+      else alert("Minting failed");
+    } catch (e: any) {
+      console.log(e);
+      alert("Minting failed: "+formatErrorMessages(e.message));
+    }
+  }
+
   useEffect(() => {
     const html = document.querySelector("html");
     const drawer = document.querySelector(`.mint-drawer-wrapper-popup`);
@@ -34,6 +58,8 @@ export default function MintDrawer() {
     ) as HTMLElement;
 
     const tl = gsap.timeline();
+
+
 
     if (isOpenMint) {
       html?.classList.add("locked");
@@ -189,7 +215,7 @@ export default function MintDrawer() {
           </button>
 
           <div className="w-full grid grid-cols-2 grid-rows-2 gap-6 px-6">
-            {statuesValue.map((statue) => (
+            {statuesValue.map((statue,index) => (
               <button
                 key={statue._id}
                 onClick={() => {
@@ -198,6 +224,7 @@ export default function MintDrawer() {
                   setPrice(statue.price);
                   setMaterial(statue.material);
                   setWeight(statue.weight);
+                  setCurrentSelectedStatue(index);
                 }}
                 className={`flex flex-col justify-center items-center rounded-[27px] overflow-hidden ${
                   statue.title === title ? "opacity-100" : "opacity-20"
@@ -242,8 +269,9 @@ export default function MintDrawer() {
 
           <button
             onClick={() => {
-              setOpenMint(false);
-              setOpenMintForm(true);
+              // setOpenMint(false);
+              // setOpenMintForm(true);
+              mintNFT()
             }}
             className="w-[80%] mt-6 lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
           >

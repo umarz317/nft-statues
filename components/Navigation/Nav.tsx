@@ -1,5 +1,6 @@
 import { useWalletContext } from "@/contexts/wallet";
 import { bebas } from "@/pages/_app";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useLenis } from "@studio-freight/react-lenis";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,8 +23,8 @@ function NavItem({ href, text }: { href: string; text: string }) {
 }
 
 export default function Nav() {
-  const { handleMetamaskConnection, walletAddress, nfts } = useWalletContext();
-  console.log(walletAddress, nfts);
+  // const { handleMetamaskConnection, walletAddress, nfts } = useWalletContext();
+  // console.log(walletAddress, nfts);
 
   return (
     <div className="fixed nav-wrapper z-[999] left-0 top-0 w-full px-4 lg:px-20 pt-8 -translate-y-[100%]">
@@ -47,19 +48,7 @@ export default function Nav() {
           <NavItem href="#team" text="Team" />
           <NavItem href="#faq" text="FAQ" />
         </nav>
-        {walletAddress ? (
-          <div className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter">
-            {walletAddress?.slice(0, 6) + "..." + walletAddress?.slice(38)}
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={handleMetamaskConnection}
-            className="block text-[#FF3600] text-lg lg:text-2xl font-medium tracking-tighter"
-          >
-            Connect Wallet
-          </button>
-        )}
+          <ConnectButton/>
       </div>
     </div>
   );

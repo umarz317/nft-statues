@@ -29,6 +29,8 @@ type ContextType = {
   setOpenMintForm: (open: boolean) => void;
   statuesValue: StatueType[];
   setStatuesValue: (statues: StatueType[]) => void;
+  currentSelectedStatue:number,
+  setCurrentSelectedStatue:(number:number)=> void;
 };
 
 export const MintItemDrawerContext = createContext<ContextType>({
@@ -50,6 +52,8 @@ export const MintItemDrawerContext = createContext<ContextType>({
   setOpenMintForm: (open: boolean) => {},
   statuesValue: [],
   setStatuesValue: (statues: StatueType[]) => {},
+  currentSelectedStatue:-1,
+  setCurrentSelectedStatue:(number:number)=>{}
 });
 
 export function useMintItemDrawer() {
@@ -70,6 +74,7 @@ export default function MintItemDrawerProvider({
   const [isOpenMint, setOpenMint] = useState(false);
   const [isOpenMintForm, setOpenMintForm] = useState(false);
   const [statuesValue, setStatuesValue] = useState<StatueType[]>([]);
+  const [currentSelectedStatue,setCurrentSelectedStatue] = useState<number>(-1);
 
   return (
     <MintItemDrawerContext.Provider
@@ -92,6 +97,8 @@ export default function MintItemDrawerProvider({
         setOpenMintForm,
         statuesValue,
         setStatuesValue,
+        currentSelectedStatue,
+        setCurrentSelectedStatue,
       }}
     >
       {children}

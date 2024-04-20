@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
 
 function MintItem({
+  index,
   imageSRC,
   title,
   height,
@@ -17,6 +18,7 @@ function MintItem({
   material,
   weight,
 }: {
+  index:number
   imageSRC: string;
   title: string;
   height: number;
@@ -33,6 +35,8 @@ function MintItem({
     setWeight,
     setOpen,
     setOpenMint,
+    currentSelectedStatue,
+    setCurrentSelectedStatue
   } = useMintItemDrawer();
   return (
     <>
@@ -57,6 +61,7 @@ function MintItem({
                 setMaterial(material);
                 setWeight(weight);
                 setOpenMint(true);
+                setCurrentSelectedStatue(index)
               }}
               className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2"
             >
@@ -203,9 +208,10 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
           prevEl: ".mint-carousel-wrapper .swiper-prev",
         }}
       >
-        {statues.map((statue) => (
+        {statues.map((statue,index) => (
           <SwiperSlide key={statue._id}>
             <MintItem
+            index={index}
               title={statue.title}
               height={statue.height}
               price={statue.price}

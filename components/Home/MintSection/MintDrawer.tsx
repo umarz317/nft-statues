@@ -25,11 +25,13 @@ export default function MintDrawer() {
     setOpenMint,
     setOpenMintForm,
     statuesValue,
+    currentSelectedStatue,
+    setCurrentSelectedStatue
   } = useMintItemDrawer();
   const lenis = useLenis(() => {});
 
   //mint functionality
-  const [currentSelectedStatue,setCurrentSelectedStatue] = useState<number>(-1);
+
   const { writeContractAsync } = useWriteContract();
   const client = usePublicClient();
 

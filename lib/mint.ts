@@ -783,6 +783,9 @@ export async function mint(publicClient:any,writeContractAsync: any, tokenID: st
 }
 
 export function formatErrorMessages(error: string) {
+  if(error.includes('User')){
+    return 'User denied transaction';
+  }
   console.log(error.split(':')[0])
   var message = error.split(':')[0].split('Contract Call:')[0].trim()
   if(message.includes('balance')){

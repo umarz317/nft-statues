@@ -23,7 +23,7 @@ export default function MintFormDrawer() {
     const drawer = document.querySelector(`.mint-form-drawer-wrapper-popup`);
     const bg = document.querySelector(`.mint-form-drawer-popup-bg`);
     const drawerRight = document.querySelector(
-      `.mint-form-drawer-popup-right`
+      `.mint-form-drawer-popup-right`,
     ) as HTMLElement;
 
     const tl = gsap.timeline();
@@ -42,7 +42,7 @@ export default function MintFormDrawer() {
         {
           opacity: 0,
         },
-        0
+        0,
       );
     }
 
@@ -189,7 +189,7 @@ export default function MintFormDrawer() {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-full grid grid-cols-2 grid-rows-3 gap-6 px-6"
+            className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-3 gap-6 px-6"
           >
             {InputsData.map((input) => (
               <div key={input.name}>

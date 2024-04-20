@@ -13,6 +13,8 @@ import Marquee from "@/components/Marquee";
 import FaQSection from "@/components/Home/FaQSection";
 import BuyNowSection from "@/components/Home/BuyNow";
 import TeamSection from "@/components/Home/TeamSection";
+import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -111,6 +113,12 @@ export default function Home({
   works: any[];
   teamMembers: any[];
 }) {
+  const { setStatuesValue } = useMintItemDrawer();
+
+  useEffect(() => {
+    setStatuesValue(statues);
+  }, [setStatuesValue, statues]);
+
   return (
     <>
       <Head>

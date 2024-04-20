@@ -1,7 +1,35 @@
-import { useState } from "react";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
-export const MintItemDrawerContext = createContext({
+type StatueType = {
+  title: string;
+  material: string;
+  height: number;
+  weight: number;
+  price: number;
+  image: any;
+  _id: string;
+};
+
+type ContextType = {
+  title: string;
+  setTitle: (title: string) => void;
+  height: number;
+  setHeight: (height: number) => void;
+  price: number;
+  setPrice: (price: number) => void;
+  material: string;
+  setMaterial: (material: string) => void;
+  weight: number;
+  setWeight: (weight: number) => void;
+  isOpen: boolean;
+  setOpen: (open: boolean) => void;
+  isOpenMint: boolean;
+  setOpenMint: (open: boolean) => void;
+  statuesValue: StatueType[];
+  setStatuesValue: (statues: StatueType[]) => void; // Corrected type
+};
+
+export const MintItemDrawerContext = createContext<ContextType>({
   title: "",
   setTitle: (title: string) => {},
   height: 0,
@@ -16,6 +44,8 @@ export const MintItemDrawerContext = createContext({
   setOpen: (open: boolean) => {},
   isOpenMint: false,
   setOpenMint: (open: boolean) => {},
+  statuesValue: [],
+  setStatuesValue: (statues: StatueType[]) => {}, // Corrected type
 });
 
 export function useMintItemDrawer() {
@@ -34,6 +64,7 @@ export default function MintItemDrawerProvider({
   const [weight, setWeight] = useState(0);
   const [isOpen, setOpen] = useState(false);
   const [isOpenMint, setOpenMint] = useState(false);
+  const [statuesValue, setStatuesValue] = useState<StatueType[]>([]);
 
   return (
     <MintItemDrawerContext.Provider
@@ -52,6 +83,8 @@ export default function MintItemDrawerProvider({
         setOpen,
         isOpenMint,
         setOpenMint,
+        statuesValue,
+        setStatuesValue,
       }}
     >
       {children}

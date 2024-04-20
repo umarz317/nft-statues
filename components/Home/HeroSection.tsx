@@ -110,7 +110,7 @@ export default function HeroSection({}) {
       <div className="absolute z-[4] bottom-[15%] text-xl flex flex-col items-center gap-4">
         <button
           onClick={()=>{
-            lenis.scrollTo("#mint");
+            lenis?.scrollTo("#mint");
           }}
           style={{
             boxShadow: "0px 0px 20px 5px rgba(255,54,0,0.42)",

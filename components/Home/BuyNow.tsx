@@ -1,6 +1,7 @@
 import Image from "next/image";
 import SectionHeader from "./SectionHeader";
 import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
+// import { mint } from "@/lib/mint";
 
 export default function BuyNowSection() {
   const { setOpenMint } = useMintItemDrawer();

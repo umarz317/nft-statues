@@ -16,11 +16,7 @@ export default function MintFormDrawer() {
   const { isOpenMintForm, setOpenMintForm } = useMintItemDrawer();
   const lenis = useLenis(() => {});
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
     const html = document.querySelector("html");
@@ -58,6 +54,7 @@ export default function MintFormDrawer() {
   const onSubmit = (data: any) => {
     console.log("data:", data);
     setOpenMintForm(false);
+    reset();
   };
 
   return (

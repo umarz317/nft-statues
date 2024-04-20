@@ -25,8 +25,10 @@ type ContextType = {
   setOpen: (open: boolean) => void;
   isOpenMint: boolean;
   setOpenMint: (open: boolean) => void;
+  isOpenMintForm: boolean;
+  setOpenMintForm: (open: boolean) => void;
   statuesValue: StatueType[];
-  setStatuesValue: (statues: StatueType[]) => void; // Corrected type
+  setStatuesValue: (statues: StatueType[]) => void;
 };
 
 export const MintItemDrawerContext = createContext<ContextType>({
@@ -44,8 +46,10 @@ export const MintItemDrawerContext = createContext<ContextType>({
   setOpen: (open: boolean) => {},
   isOpenMint: false,
   setOpenMint: (open: boolean) => {},
+  isOpenMintForm: false,
+  setOpenMintForm: (open: boolean) => {},
   statuesValue: [],
-  setStatuesValue: (statues: StatueType[]) => {}, // Corrected type
+  setStatuesValue: (statues: StatueType[]) => {},
 });
 
 export function useMintItemDrawer() {
@@ -64,6 +68,7 @@ export default function MintItemDrawerProvider({
   const [weight, setWeight] = useState(0);
   const [isOpen, setOpen] = useState(false);
   const [isOpenMint, setOpenMint] = useState(false);
+  const [isOpenMintForm, setOpenMintForm] = useState(false);
   const [statuesValue, setStatuesValue] = useState<StatueType[]>([]);
 
   return (
@@ -83,6 +88,8 @@ export default function MintItemDrawerProvider({
         setOpen,
         isOpenMint,
         setOpenMint,
+        isOpenMintForm,
+        setOpenMintForm,
         statuesValue,
         setStatuesValue,
       }}

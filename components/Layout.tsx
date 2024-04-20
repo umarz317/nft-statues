@@ -6,6 +6,7 @@ import { Lenis, useLenis } from "@studio-freight/react-lenis";
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import MintDrawer from "./Home/MintSection/MintDrawer";
+import MintFormDrawer from "./Home/MintSection/MintFormDrawer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -48,6 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       >
         <MintItemDrawer />
         <MintDrawer />
+        <MintFormDrawer />
         {!isSanity && <Loader />}
         {!isSanity && <Nav />}
         {children}

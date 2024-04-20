@@ -1,8 +1,10 @@
 import Image from "next/image";
 import SectionHeader from "./SectionHeader";
+import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
 // import { mint } from "@/lib/mint";
 
 export default function BuyNowSection() {
+  const { setOpenMint } = useMintItemDrawer();
   return (
     <section className="buy-section pt-12 w-screen relative pb-12">
       <div id="buy" className="absolute top-0 -mt-44 h-32" />
@@ -25,6 +27,9 @@ export default function BuyNowSection() {
           className="max-w-[50%]"
         />
         <button
+          onClick={() => {
+            setOpenMint(true);
+          }}
           style={{
             boxShadow: "0px 0px 20px 5px rgba(255,54,0,0.42)",
           }}

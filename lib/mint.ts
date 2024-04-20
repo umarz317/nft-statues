@@ -16,8 +16,10 @@ export async function connectWallet() {
   } else {
     alert("Please install MetaMask!");
   }
+  return {};
 }
 export async function mint() {
   const { address, signer } = await connectWallet();
   const mintContract = new ethers.Contract(MintAddress, ABI, signer);
+  console.log(address, signer, mintContract);
 }

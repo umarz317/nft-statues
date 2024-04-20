@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SectionHeader from "./SectionHeader";
+// import { mint } from "@/lib/mint";
 
 export default function BuyNowSection() {
   return (

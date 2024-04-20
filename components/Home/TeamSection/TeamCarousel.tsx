@@ -84,13 +84,13 @@ export default function TeamCarousel({ teamMembers }: { teamMembers: any[] }) {
       ".team-carousel-wrapper .buttons",
       { y: "100%", opacity: 0 },
       { y: 0, opacity: 1, duration: 1 },
-      0
+      0,
     );
     animInTlFirst.fromTo(
       ".team-carousel-wrapper .swiper-slide",
       { x: "100%", opacity: 0 },
       { x: 0, opacity: 1, duration: 1.5, stagger: 0.1 },
-      0
+      0,
     );
 
     return () => {

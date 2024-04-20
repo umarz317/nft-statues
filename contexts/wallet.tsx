@@ -1,4 +1,14 @@
-import { FC, ReactNode, createContext, useContext, useState } from "react";
+import { Provider, ethers } from "ethers";
+import {
+  FC,
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+
 type TWalletContext = {
   walletAddress: string | null;
   nfts: Nft[] | null;
@@ -15,19 +25,51 @@ type Props = {
 export const WalletProvider: FC<Props> = ({ children }) => {
   const [walletAddress, setWalletAddress] = useState<string | null>(null);
   const [nfts, setNfts] = useState<Nft[] | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
-  const getNfts = async (address: string) => {
+  const sendToApi = useCallback(
+    async (
+      path: `/${string}`,
+      options?: {
+        method: string;
+        headers?: Record<string, string>;
+        body?: string;
+      },
+    ) => {
+      if (typeof window !== "undefined") {
+        const response = await fetch(`${window.location.origin}${path}`, {
+          ...options,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+            ...(options?.headers ?? {}),
+          },
+        }).then((res) => res.json());
+
+        return response;
+      }
+    },
+
+    [token],
+  );
+
+  const getNfts = useCallback(async () => {
     if (typeof window !== "undefined") {
-      if (address) {
-        const response: { data: { nfts: Nft[] } } = await fetch(
-          `${window.location.origin}/api/load-nfts?address=${address}`
-        ).then((res) => res.json());
-        setNfts(response.data.nfts);
+      if (token) {
+        const response: { data: { nfts: Nft[] } } = await sendToApi(
+          `/api/load-nfts`,
+          {
+            method: "GET",
+          },
+        );
+        if (response?.data?.nfts) {
+          setNfts(response.data.nfts);
+        }
       }
     }
-  };
+  }, [sendToApi, token]);
 
-  const handleMetamaskConnection = async () => {
+  const handleMetamaskConnection = useCallback(async () => {
     if (typeof window !== "undefined") {
       if ((window as any).ethereum) {
         try {
@@ -35,17 +77,60 @@ export const WalletProvider: FC<Props> = ({ children }) => {
             method: "eth_requestAccounts",
           });
 
-          console.log("Connected to MetaMask:", data[0]);
           setWalletAddress(data[0]);
-          await getNfts(data[0]);
+
+          const nonceData = (await sendToApi(`/api/nonce`, {
+            method: "POST",
+          })) as { nonce: string };
+          const provider = new ethers.BrowserProvider((window as any).ethereum);
+          const signer = await provider.getSigner();
+          const address = await signer.getAddress();
+
+          const message = `I am signing this message to prove my identity. Nonce: ${nonceData.nonce}`;
+
+          const signedMessage = await signer.signMessage(message);
+
+          const loginData = { signedMessage, message, address };
+
+          const tokenData = (await sendToApi(`/api/login`, {
+            method: "POST",
+            body: JSON.stringify(loginData),
+          })) as { token: string };
+
+          window.localStorage.setItem("accessToken", tokenData.token);
+          setToken(tokenData.token);
         } catch (error) {
           console.error("Error connecting to MetaMask:", error);
         }
       } else {
-        alert("Please install Metamask");
+        window.alert("Please install Metamask");
       }
     }
-  };
+  }, [sendToApi, setWalletAddress]);
+
+  useEffect(() => {
+    (async () => {
+      if (typeof window !== "undefined") {
+        const tkn = window.localStorage.getItem("accessToken") as string | null;
+        if (tkn) {
+          const verify = await sendToApi("/api/verify", {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${tkn}`,
+            },
+          });
+          if (verify.status === "ok") {
+            setWalletAddress(verify.data.address);
+            setToken(tkn);
+          } else {
+            await handleMetamaskConnection();
+          }
+
+          await getNfts();
+        }
+      }
+    })();
+  }, [handleMetamaskConnection, sendToApi, getNfts]);
 
   return (
     <WalletContext.Provider

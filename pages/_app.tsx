@@ -5,6 +5,8 @@ import type { AppProps } from "next/app";
 import { GeistSans } from "geist/font/sans";
 import { Bebas_Neue } from "next/font/google";
 import MintItemDrawerProvider from "@/hooks/useMintItemDrawer";
+import { Web3Context } from "@/contexts/Web3Context";
+import { Wallet } from "ethers";
 import { WalletProvider } from "@/contexts/wallet";
 
 export const bebas = Bebas_Neue({
@@ -16,13 +18,15 @@ export const bebas = Bebas_Neue({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div style={GeistSans.style} className="font-wrapper">
-      <WalletProvider>
+      <Web3Context>
+        <WalletProvider>
         <MintItemDrawerProvider>
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </MintItemDrawerProvider>
-      </WalletProvider>
+        </WalletProvider>
+      </Web3Context>
     </div>
   );
 }

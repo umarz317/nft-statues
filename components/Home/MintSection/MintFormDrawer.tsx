@@ -3,6 +3,15 @@ import { gsap } from "@/lib/gsap";
 import { useEffect } from "react";
 import { useLenis } from "@studio-freight/react-lenis";
 import { useForm } from "react-hook-form";
+import {
+  usePublicClient,
+  useWaitForTransactionReceipt,
+  useWalletClient,
+  useWriteContract,
+} from "wagmi";
+import { BASC_CONTRACT } from "@/lib/constants";
+import { parseEther } from "ethers";
+import { mint } from "@/lib/mint";
 
 const InputsData = [
   { name: "name", label: "Name", type: "text" },
@@ -23,7 +32,7 @@ export default function MintFormDrawer() {
     const drawer = document.querySelector(`.mint-form-drawer-wrapper-popup`);
     const bg = document.querySelector(`.mint-form-drawer-popup-bg`);
     const drawerRight = document.querySelector(
-      `.mint-form-drawer-popup-right`,
+      `.mint-form-drawer-popup-right`
     ) as HTMLElement;
 
     const tl = gsap.timeline();
@@ -42,7 +51,7 @@ export default function MintFormDrawer() {
         {
           opacity: 0,
         },
-        0,
+        0
       );
     }
 
@@ -51,10 +60,11 @@ export default function MintFormDrawer() {
     };
   }, [isOpenMintForm, lenis]);
 
-  const onSubmit = (data: any) => {
-    console.log("data:", data);
-    setOpenMintForm(false);
-    reset();
+  const onSubmit = async (data: any) => {
+    
+      setOpenMintForm(false);
+      reset();
+    
   };
 
   return (

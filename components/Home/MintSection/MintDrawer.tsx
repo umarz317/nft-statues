@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useLenis } from "@studio-freight/react-lenis";
 import { urlFor } from "@/lib/sanity/sanityClient";
-import { mint,formatErrorMessages } from "@/lib/mint";
+import { mint, formatErrorMessages } from "@/lib/mint";
 import { usePublicClient, useWriteContract } from "wagmi";
 import { NFTPrices } from "@/lib/constants";
 
@@ -26,7 +26,9 @@ export default function MintDrawer() {
     setOpenMintForm,
     statuesValue,
     currentSelectedStatue,
-    setCurrentSelectedStatue
+    setCurrentSelectedStatue,
+    isOpenSelectNFT,
+    setOpenSelectNFT,
   } = useMintItemDrawer();
   const lenis = useLenis(() => {});
 
@@ -35,19 +37,25 @@ export default function MintDrawer() {
   const { writeContractAsync } = useWriteContract();
   const client = usePublicClient();
 
-  async function mintNFT(){
-    console.log('minting...',currentSelectedStatue)
-    if(currentSelectedStatue === -1){
+  async function mintNFT() {
+    console.log("minting...", currentSelectedStatue);
+    if (currentSelectedStatue === -1) {
       alert("Please select a statue");
       return;
     }
     try {
-      const res = await mint(client,writeContractAsync , (3-currentSelectedStatue).toString(), NFTPrices[currentSelectedStatue.toString()], false);
+      const res = await mint(
+        client,
+        writeContractAsync,
+        (3 - currentSelectedStatue).toString(),
+        NFTPrices[currentSelectedStatue.toString()],
+        false
+      );
       if (res === "success") alert("Minting successful");
       else alert("Minting failed");
     } catch (e: any) {
       console.log(e);
-      alert("Minting failed: "+formatErrorMessages(e.message));
+      alert("Minting failed: " + formatErrorMessages(e.message));
     }
   }
 
@@ -60,8 +68,6 @@ export default function MintDrawer() {
     ) as HTMLElement;
 
     const tl = gsap.timeline();
-
-
 
     if (isOpenMint) {
       html?.classList.add("locked");
@@ -217,7 +223,7 @@ export default function MintDrawer() {
           </button>
 
           <div className="w-full grid grid-cols-2 grid-rows-2 gap-6 px-6">
-            {statuesValue.map((statue,index) => (
+            {statuesValue.map((statue, index) => (
               <button
                 key={statue._id}
                 onClick={() => {
@@ -271,9 +277,9 @@ export default function MintDrawer() {
 
           <button
             onClick={() => {
-              // setOpenMint(false);
-              // setOpenMintForm(true);
-              mintNFT()
+              setOpenMint(false);
+              setOpenSelectNFT(true);
+              // mintNFT()
             }}
             className="w-[80%] mt-6 lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
           >

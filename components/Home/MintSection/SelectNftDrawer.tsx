@@ -187,6 +187,8 @@ export default function SelectNftDrawer() {
                 key={statue._id}
                 onClick={() => {
                   setSelectedNFT(statue);
+                  setOpenSelectNFT(false);
+                  setOpenMintForm(true);
                 }}
                 className={`flex flex-col justify-between items-center rounded-[35px] overflow-hidden max-w-[437.3px] w-full h-[525px] ${
                   selectedNFT?._id === statue._id ? "opacity-100" : "opacity-65"
@@ -214,8 +216,8 @@ export default function SelectNftDrawer() {
                     <button
                       onClick={() => {
                         setSelectedNFT(statue);
-                        // setOpenSelectNFT(false);
-                        // setOpenMintForm(true);
+                        setOpenSelectNFT(false);
+                        setOpenMintForm(true);
                       }}
                       className={`w-[100px] sm:w-[151.8px] mt-6 group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center text-black text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full py-2 font-black shrink-0  ${
                         selectedNFT?._id === statue._id

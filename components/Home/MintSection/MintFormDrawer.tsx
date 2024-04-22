@@ -12,6 +12,8 @@ import {
 import { BASC_CONTRACT } from "@/lib/constants";
 import { parseEther } from "ethers";
 import { mint } from "@/lib/mint";
+import Image from "next/image";
+import { urlFor } from "@/lib/sanity/sanityClient";
 
 const InputsData = [
   { name: "name", label: "Name", type: "text" },
@@ -22,7 +24,8 @@ const InputsData = [
 ];
 
 export default function MintFormDrawer() {
-  const { isOpenMintForm, setOpenMintForm } = useMintItemDrawer();
+  const { statuesValue, selectedNFT, isOpenMintForm, setOpenMintForm } =
+    useMintItemDrawer();
   const lenis = useLenis(() => {});
 
   const { register, handleSubmit, reset } = useForm();
@@ -61,10 +64,8 @@ export default function MintFormDrawer() {
   }, [isOpenMintForm, lenis]);
 
   const onSubmit = async (data: any) => {
-    
-      setOpenMintForm(false);
-      reset();
-    
+    setOpenMintForm(false);
+    reset();
   };
 
   return (
@@ -74,8 +75,8 @@ export default function MintFormDrawer() {
       }}
       className="fixed left-0 top-0 z-[1000] w-full h-full mint-form-drawer-wrapper-popup"
     >
-      <div className="mint-form-drawer-popup-right absolute z-10 h-screen w-screen top-0 left-0 p-6 sm:p-8">
-        <div className="relative mint-form-drawer-popup-content rounded-3xl w-full h-full bg-[#0B0B0B] bg-center bg-no-repeat bg-contain flex flex-col justify-center items-center p-2 sm:p-6">
+      <div className="mint-form-drawer-popup-right absolute z-10 h-full max-h-[776.9px] w-full max-w-[1640.1px] top-0 bottom-0 right-0 left-0 my-auto mx-auto p-6 sm:p-8">
+        <div className="relative mint-form-drawer-popup-content rounded-3xl w-full h-full bg-[#0B0B0B] bg-center bg-no-repeat bg-contain flex flex-col justify-center items-center p-2 xl:p-6">
           <div className="angles z-10">
             <svg
               width="12"
@@ -178,7 +179,7 @@ export default function MintFormDrawer() {
               />
             </svg>
           </div>
-          <button
+          {/* <button
             onClick={() => setOpenMintForm(false)}
             className="absolute right-2 top-2 w-9 sm:w-10 h-9 sm:h-10 bg-[#191919] rounded-full z-10 flex items-center justify-center text-[#717171] hover:scale-105 transition-transform duration-300 ease-out"
           >
@@ -195,51 +196,176 @@ export default function MintFormDrawer() {
                 fill="currentColor"
               />
             </svg>
-          </button>
+          </button> */}
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-3 gap-6 px-6"
-          >
-            {InputsData.map((input) => (
-              <div key={input.name}>
-                <label htmlFor={input.name} className="block mb-1 text-white">
-                  {input.label}:
-                </label>
-                <input
-                  {...register(input.name)}
-                  type={input.type}
-                  id={input.name}
-                  name={input.name}
-                  className="w-full border border-gray-300 bg-transparent text-white rounded-full px-5 py-2"
-                />
-              </div>
-            ))}
-
-            <div>
-              <label className="block mb-1 text-white">Forge:</label>
-              <button
-                type="submit"
-                className="w-full group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
-              >
-                <span>Forge</span>
-                <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
-                  <svg
-                    width="100%"
-                    viewBox="0 0 15 12"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+          <div className="w-full h-full flex lg:flex-row flex-col-reverse gap-12 xl:gap-24 items-center justify-between pr-4 md:pr-11 xl:pr-24 pl-4 md:pl-11 xl:pl-[88px] py-10 lg:py-0 overflow-y-scroll lg:overflow-y-hidden overflow-x-hidden">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-3 gap-10 px-6"
+            >
+              {InputsData.map((input) => (
+                <div key={input.name}>
+                  <label
+                    htmlFor={input.name}
+                    className="block mb-5 text-white/40 text-xl"
                   >
-                    <path
-                      d="M7.81607 0.945313L13.0742 6.20345L7.81607 11.4616M0.30443 6.20345L12.6986 6.20346"
-                      stroke="black"
-                      strokeWidth="1.50233"
-                    />
-                  </svg>
-                </span>
-              </button>
+                    {input.label}
+                  </label>
+                  <input
+                    {...register(input.name)}
+                    type={input.type}
+                    id={input.name}
+                    name={input.name}
+                    className="w-full text-xl border border-gray-300 bg-transparent text-white rounded-full px-5 py-6"
+                  />
+                </div>
+              ))}
+
+              <div>
+                <label className="block mb-5 text-white/40 text-xl">
+                  Forge
+                </label>
+                <button
+                  type="submit"
+                  className="w-full h-20 group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center text-black font-medium text-base lg:text-xl tracking-tighter rounded-full overflow-hidden [box-shadow:_0_0_99px_0_rgba(255,_54,_0,_0.4)]"
+                >
+                  <div className="w-full h-full flex items-center justify-center bg-[#ff3600]">
+                    <span className="text-[26px] uppercase text-[#0e0e0e] font-black">
+                      Forge
+                    </span>
+                  </div>
+                  <div className="w-[91.5px] h-full flex items-center justify-center shrink-0 backdrop-blur-lg bg-[#1E1E1E]/50 pr-[25px]">
+                    <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="27.001"
+                        height="19.071"
+                        viewBox="0 0 27.001 19.071"
+                      >
+                        <path
+                          data-name="Union 1"
+                          d="M-8133.95-1187.687a2 2 0 0 1 0-2.829l4.121-4.119H-8148a2 2 0 0 1-2-2 2 2 0 0 1 2-2h18.171l-4.122-4.121a2 2 0 0 1 0-2.829 2 2 0 0 1 2.829 0l7.071 7.071a2.007 2.007 0 0 1 .213.252 2 2 0 0 1 .838 1.628 2 2 0 0 1-.841 1.63 2.013 2.013 0 0 1-.21.248l-7.071 7.071a1.991 1.991 0 0 1-1.414.586 2 2 0 0 1-1.414-.588z"
+                          transform="translate(8150 1206.172)"
+                          style={{ fill: "#ff3600" }}
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </form>
+            <div className="w-60 lg:w-[488.9px] md:w-80 h-60 lg:h-[596px] md:h-80 rounded-[40px] bg-black shrink-0 relative">
+              <div className="angles z-10">
+                <svg
+                  width="12"
+                  height="12"
+                  className="absolute -top-2 -left-2 z-10"
+                  viewBox="0 0 8 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    x1="0.507099"
+                    y1="2.21659e-08"
+                    x2="0.507099"
+                    y2="7.60648"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                  <line
+                    x1="7.60938"
+                    y1="0.507099"
+                    x2="0.00289154"
+                    y2="0.507099"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  className="absolute -bottom-2 -left-2 -rotate-90"
+                  viewBox="0 0 8 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    x1="0.507099"
+                    y1="2.21659e-08"
+                    x2="0.507099"
+                    y2="7.60648"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                  <line
+                    x1="7.60938"
+                    y1="0.507099"
+                    x2="0.00289154"
+                    y2="0.507099"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  className="absolute -bottom-2 -right-2 scale-[-1]"
+                  viewBox="0 0 8 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    x1="0.507099"
+                    y1="2.21659e-08"
+                    x2="0.507099"
+                    y2="7.60648"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                  <line
+                    x1="7.60938"
+                    y1="0.507099"
+                    x2="0.00289154"
+                    y2="0.507099"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                </svg>
+                <svg
+                  width="12"
+                  height="12"
+                  className="absolute -top-2 -right-2 rotate-90"
+                  viewBox="0 0 8 8"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line
+                    x1="0.507099"
+                    y1="2.21659e-08"
+                    x2="0.507099"
+                    y2="7.60648"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                  <line
+                    x1="7.60938"
+                    y1="0.507099"
+                    x2="0.00289154"
+                    y2="0.507099"
+                    stroke="#FF3600"
+                    strokeWidth="1.0142"
+                  />
+                </svg>
+              </div>
+              {/* <Image
+                src={urlFor(statuesValue[0]?.image)?.url() || ""}
+                width={437.3}
+                height={358.6}
+                alt={statuesValue[0]?.title || ""}
+                className="w-full h-[358.6px]"
+              /> */}
             </div>
-          </form>
+          </div>
         </div>
       </div>
 

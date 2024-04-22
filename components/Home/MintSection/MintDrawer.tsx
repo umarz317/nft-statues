@@ -21,6 +21,8 @@ export default function MintDrawer() {
     setPrice,
     setMaterial,
     setWeight,
+    loading,
+    setLoading,
     isOpenMint,
     setOpenMint,
     setOpenMintForm,
@@ -44,6 +46,7 @@ export default function MintDrawer() {
       return;
     }
     try {
+      setLoading(true);
       const res = await mint(
         client,
         writeContractAsync,
@@ -51,11 +54,17 @@ export default function MintDrawer() {
         NFTPrices[currentSelectedStatue.toString()],
         false
       );
-      if (res === "success") alert("Minting successful");
-      else alert("Minting failed");
+      if (res === "success") {
+        alert("Minting successful");
+        setLoading(false);
+      } else {
+        alert("Minting failed");
+        setLoading(false);
+      }
     } catch (e: any) {
       console.log(e);
       alert("Minting failed: " + formatErrorMessages(e.message));
+      setLoading(false);
     }
   }
 
@@ -283,21 +292,29 @@ export default function MintDrawer() {
             }}
             className="w-[80%] mt-6 lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2"
           >
-            <span>Mint</span>
-            <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
-              <svg
-                width="100%"
-                viewBox="0 0 15 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.81607 0.945313L13.0742 6.20345L7.81607 11.4616M0.30443 6.20345L12.6986 6.20346"
-                  stroke="black"
-                  strokeWidth="1.50233"
-                />
-              </svg>
-            </span>
+            {loading ? (
+              <div className="flex justify-center items-center">
+                <div className="w-12 h-12 border-4 border-t-4 border-gray-200 rounded-full animate-spin"></div>
+              </div>
+            ) : (
+              <>
+                <span>Mint</span>
+                <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
+                  <svg
+                    width="100%"
+                    viewBox="0 0 15 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7.81607 0.945313L13.0742 6.20345L7.81607 11.4616M0.30443 6.20345L12.6986 6.20346"
+                      stroke="black"
+                      strokeWidth="1.50233"
+                    />
+                  </svg>
+                </span>
+              </>
+            )}
           </button>
         </div>
       </div>

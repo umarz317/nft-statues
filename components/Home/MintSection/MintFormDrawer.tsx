@@ -37,6 +37,9 @@ export default function MintFormDrawer() {
     const drawerRight = document.querySelector(
       `.mint-form-drawer-popup-right`
     ) as HTMLElement;
+    const nftImage = document.querySelector(
+      `.mint-form-drawer-popup-image`
+    ) as HTMLElement;
 
     const tl = gsap.timeline();
 
@@ -44,11 +47,14 @@ export default function MintFormDrawer() {
       html?.classList.add("locked");
       lenis?.stop();
       tl.to(bg, { opacity: 1 });
-      tl.to(drawerRight, { opacity: 1 }, 0);
+      tl.to(drawerRight, { opacity: 1, scaleX: 1 }, 0);
+      tl.to(nftImage, { opacity: 1, rotate: "0deg", x: 0 }, 0);
     } else {
       html?.classList.remove("locked");
       lenis?.start();
-      tl.to(drawerRight, { opacity: 0 });
+      tl.to(drawerRight, { opacity: 0, scaleX: 0 }).then(() =>
+        tl.to(nftImage, { opacity: 0, rotate: "180deg", x: "200%" })
+      );
       tl.to(
         bg,
         {
@@ -254,7 +260,7 @@ export default function MintFormDrawer() {
                 </button>
               </div>
             </form>
-            <div className="w-60 lg:w-[488.9px] md:w-80 h-60 lg:h-[596px] md:h-80 rounded-[40px] bg-black shrink-0 relative">
+            <div className="mint-form-drawer-popup-image w-60 lg:w-[488.9px] md:w-80 h-60 lg:h-[596px] md:h-80 rounded-[40px] bg-black shrink-0 relative">
               <div className="angles z-10">
                 <svg
                   width="12"

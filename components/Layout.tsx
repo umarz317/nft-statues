@@ -7,6 +7,7 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import MintDrawer from "./Home/MintSection/MintDrawer";
 import MintFormDrawer from "./Home/MintSection/MintFormDrawer";
+import SelectNftDrawer from "./Home/MintSection/SelectNftDrawer";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -50,6 +51,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <MintItemDrawer />
         <MintDrawer />
         <MintFormDrawer />
+        <SelectNftDrawer />
         {!isSanity && <Loader />}
         {!isSanity && <Nav />}
         {children}

@@ -21,16 +21,24 @@ type ContextType = {
   setMaterial: (material: string) => void;
   weight: number;
   setWeight: (weight: number) => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
   isOpen: boolean;
   setOpen: (open: boolean) => void;
+  fromBuyNow: boolean;
+  setFromBuyNow: (open: boolean) => void;
   isOpenMint: boolean;
   setOpenMint: (open: boolean) => void;
   isOpenMintForm: boolean;
   setOpenMintForm: (open: boolean) => void;
   statuesValue: StatueType[];
   setStatuesValue: (statues: StatueType[]) => void;
-  currentSelectedStatue:number,
-  setCurrentSelectedStatue:(number:number)=> void;
+  currentSelectedStatue: number;
+  setCurrentSelectedStatue: (number: number) => void;
+  selectedNFT: any;
+  setSelectedNFT: any;
+  isOpenSelectNFT: boolean;
+  setOpenSelectNFT: (open: boolean) => void;
 };
 
 export const MintItemDrawerContext = createContext<ContextType>({
@@ -44,16 +52,24 @@ export const MintItemDrawerContext = createContext<ContextType>({
   setMaterial: (material: string) => {},
   weight: 0,
   setWeight: (weight: number) => {},
+  loading: false,
+  setLoading: (loading: boolean) => {},
   isOpen: false,
   setOpen: (open: boolean) => {},
+  fromBuyNow: false,
+  setFromBuyNow: (open: boolean) => {},
   isOpenMint: false,
   setOpenMint: (open: boolean) => {},
   isOpenMintForm: false,
   setOpenMintForm: (open: boolean) => {},
   statuesValue: [],
   setStatuesValue: (statues: StatueType[]) => {},
-  currentSelectedStatue:-1,
-  setCurrentSelectedStatue:(number:number)=>{}
+  currentSelectedStatue: -1,
+  setCurrentSelectedStatue: (number: number) => {},
+  selectedNFT: {},
+  setSelectedNFT: (selectedNFT: any) => {},
+  isOpenSelectNFT: false,
+  setOpenSelectNFT: (open: boolean) => {},
 });
 
 export function useMintItemDrawer() {
@@ -70,11 +86,16 @@ export default function MintItemDrawerProvider({
   const [price, setPrice] = useState(0);
   const [material, setMaterial] = useState("");
   const [weight, setWeight] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [isOpen, setOpen] = useState(false);
+  const [fromBuyNow, setFromBuyNow] = useState(false);
   const [isOpenMint, setOpenMint] = useState(false);
   const [isOpenMintForm, setOpenMintForm] = useState(false);
   const [statuesValue, setStatuesValue] = useState<StatueType[]>([]);
-  const [currentSelectedStatue,setCurrentSelectedStatue] = useState<number>(-1);
+  const [selectedNFT, setSelectedNFT] = useState(null);
+  const [isOpenSelectNFT, setOpenSelectNFT] = useState(false);
+  const [currentSelectedStatue, setCurrentSelectedStatue] =
+    useState<number>(-1);
 
   return (
     <MintItemDrawerContext.Provider
@@ -89,8 +110,12 @@ export default function MintItemDrawerProvider({
         setMaterial,
         weight,
         setWeight,
+        loading,
+        setLoading,
         isOpen,
         setOpen,
+        fromBuyNow,
+        setFromBuyNow,
         isOpenMint,
         setOpenMint,
         isOpenMintForm,
@@ -99,6 +124,10 @@ export default function MintItemDrawerProvider({
         setStatuesValue,
         currentSelectedStatue,
         setCurrentSelectedStatue,
+        selectedNFT,
+        setSelectedNFT,
+        isOpenSelectNFT,
+        setOpenSelectNFT,
       }}
     >
       {children}

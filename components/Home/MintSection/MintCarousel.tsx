@@ -18,7 +18,7 @@ function MintItem({
   material,
   weight,
 }: {
-  index:number
+  index: number;
   imageSRC: string;
   title: string;
   height: number;
@@ -35,8 +35,9 @@ function MintItem({
     setWeight,
     setOpen,
     setOpenMint,
+    setFromBuyNow,
     currentSelectedStatue,
-    setCurrentSelectedStatue
+    setCurrentSelectedStatue,
   } = useMintItemDrawer();
   return (
     <>
@@ -61,7 +62,8 @@ function MintItem({
                 setMaterial(material);
                 setWeight(weight);
                 setOpenMint(true);
-                setCurrentSelectedStatue(index)
+                setFromBuyNow(false);
+                setCurrentSelectedStatue(index);
               }}
               className="w-full lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-lg tracking-tighter bg-white rounded-full lg:px-10 py-2"
             >
@@ -208,10 +210,10 @@ export default function MintCarousel({ statues }: { statues: any[] }) {
           prevEl: ".mint-carousel-wrapper .swiper-prev",
         }}
       >
-        {statues.map((statue,index) => (
+        {statues.map((statue, index) => (
           <SwiperSlide key={statue._id}>
             <MintItem
-            index={index}
+              index={index}
               title={statue.title}
               height={statue.height}
               price={statue.price}

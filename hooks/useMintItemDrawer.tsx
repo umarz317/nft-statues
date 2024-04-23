@@ -25,6 +25,8 @@ type ContextType = {
   setLoading: (loading: boolean) => void;
   isOpen: boolean;
   setOpen: (open: boolean) => void;
+  fromBuyNow: boolean;
+  setFromBuyNow: (open: boolean) => void;
   isOpenMint: boolean;
   setOpenMint: (open: boolean) => void;
   isOpenMintForm: boolean;
@@ -54,6 +56,8 @@ export const MintItemDrawerContext = createContext<ContextType>({
   setLoading: (loading: boolean) => {},
   isOpen: false,
   setOpen: (open: boolean) => {},
+  fromBuyNow: false,
+  setFromBuyNow: (open: boolean) => {},
   isOpenMint: false,
   setOpenMint: (open: boolean) => {},
   isOpenMintForm: false,
@@ -84,6 +88,7 @@ export default function MintItemDrawerProvider({
   const [weight, setWeight] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isOpen, setOpen] = useState(false);
+  const [fromBuyNow, setFromBuyNow] = useState(false);
   const [isOpenMint, setOpenMint] = useState(false);
   const [isOpenMintForm, setOpenMintForm] = useState(false);
   const [statuesValue, setStatuesValue] = useState<StatueType[]>([]);
@@ -109,6 +114,8 @@ export default function MintItemDrawerProvider({
         setLoading,
         isOpen,
         setOpen,
+        fromBuyNow,
+        setFromBuyNow,
         isOpenMint,
         setOpenMint,
         isOpenMintForm,

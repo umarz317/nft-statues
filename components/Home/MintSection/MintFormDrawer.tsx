@@ -26,6 +26,7 @@ const InputsData = [
 export default function MintFormDrawer() {
   const { statuesValue, selectedNFT, isOpenMintForm, setOpenMintForm } =
     useMintItemDrawer();
+  console.log("statuesValue:", statuesValue[0]);
   const lenis = useLenis(() => {});
 
   const { register, handleSubmit, reset } = useForm();
@@ -204,7 +205,10 @@ export default function MintFormDrawer() {
             </svg>
           </button> */}
 
-          <div className="w-full h-full flex lg:flex-row flex-col-reverse gap-12 xl:gap-24 items-center justify-between pr-4 md:pr-11 xl:pr-24 pl-4 md:pl-11 xl:pl-[88px] py-10 lg:py-0 overflow-y-scroll lg:overflow-y-hidden overflow-x-hidden">
+          <div
+            data-lenis-prevent
+            className="w-full h-full flex lg:flex-row flex-col-reverse gap-12 xl:gap-24 items-center justify-between pr-4 md:pr-11 xl:pr-24 pl-4 md:pl-11 xl:pl-[88px] py-10 lg:py-0 overflow-y-scroll lg:overflow-y-hidden overflow-x-hidden"
+          >
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="w-full flex flex-col sm:grid sm:grid-cols-2 sm:grid-rows-3 gap-10 px-6"
@@ -363,13 +367,15 @@ export default function MintFormDrawer() {
                   />
                 </svg>
               </div>
-              {/* <Image
-                src={urlFor(statuesValue[0]?.image)?.url() || ""}
-                width={437.3}
-                height={358.6}
-                alt={statuesValue[0]?.title || ""}
-                className="w-full h-[358.6px]"
-              /> */}
+              {selectedNFT?.image ? (
+                <Image
+                  src={urlFor(selectedNFT.image).url()}
+                  width={437.3}
+                  height={358.6}
+                  alt={selectedNFT?.title || ""}
+                  className="w-full h-full rounded-[40px]"
+                />
+              ) : null}
             </div>
           </div>
         </div>

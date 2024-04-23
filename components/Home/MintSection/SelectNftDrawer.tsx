@@ -181,7 +181,10 @@ export default function SelectNftDrawer() {
             </svg>
           </button> */}
 
-          <div className="w-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-items-center gap-12 h-screen overflow-y-scroll px-10 xl:px-48">
+          <div
+            data-lenis-prevent
+            className="w-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-items-center gap-12 h-screen overflow-y-scroll px-10 xl:px-48"
+          >
             {statuesValue.map((statue) => (
               <button
                 key={statue._id}

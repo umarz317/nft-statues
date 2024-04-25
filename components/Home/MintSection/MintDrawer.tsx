@@ -1,13 +1,22 @@
+"use client";
 import { useMintItemDrawer } from "@/hooks/useMintItemDrawer";
-import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayout";
 import { gsap } from "@/lib/gsap";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import { useLenis } from "@studio-freight/react-lenis";
 import { urlFor } from "@/lib/sanity/sanityClient";
 import { mint, formatErrorMessages } from "@/lib/mint";
-import { usePublicClient, useWriteContract } from "wagmi";
-import { NFTPrices } from "@/lib/constants";
+import {
+  useAccount,
+  usePublicClient,
+  useReadContract,
+  useWriteContract,
+} from "wagmi";
+import { APE_CONTRACT, BASC_CONTRACT, BLAB_CONTRACT } from "@/lib/constants";
+import { formatEther, parseEther } from "ethers";
+import { Switch } from "@headlessui/react";
+import { erc20Abi } from "viem";
+import toast from "react-hot-toast";
 
 export default function MintDrawer() {
   const {
@@ -32,18 +41,59 @@ export default function MintDrawer() {
     isOpenSelectNFT,
     setOpenSelectNFT,
     fromBuyNow,
+    isApe,
+    setIsApe,
   } = useMintItemDrawer();
   const lenis = useLenis(() => {});
-
-  //mint functionality
-
+  const { address } = useAccount();
   const { writeContractAsync } = useWriteContract();
+
   const client = usePublicClient();
 
+  const { data: Price } = useReadContract({
+    address: !fromBuyNow?`0x${BASC_CONTRACT.address}`:`0x${BLAB_CONTRACT.address}`,
+    abi: BASC_CONTRACT.abi,
+    functionName: isApe ? "pricesAPE" : "pricesETH",
+    args: [BigInt(3 - currentSelectedStatue)],
+  });
+
+  const { data: allowance, refetch } = useReadContract({
+    address: `0x${APE_CONTRACT}`,
+    abi: erc20Abi,
+    functionName: "allowance",
+    args: [`0x${!fromBuyNow?`${BASC_CONTRACT.address}`:`${BLAB_CONTRACT.address}`}`, address ? address : `0x0`],
+  });
+
+  async function approve() {
+    toast('Approving...',{icon:'⚠️',duration:2000})
+    try {
+      const tx = await writeContractAsync({
+        address: `0x${APE_CONTRACT}`,
+        abi: erc20Abi,
+        functionName: "approve",
+        args: [
+          `0x${!fromBuyNow?`${BASC_CONTRACT.address}`:`${BLAB_CONTRACT.address}`}`,
+          parseEther(Price ? Price.toString() : "0"),
+        ],
+      });
+      var res = client?.waitForTransactionReceipt({ hash: tx });
+      if ((await res)?.status === "success") {
+        toast.success('Approval Successful!')
+      } else {
+        toast.error('Approval Failed!')
+      }
+      refetch();
+    } catch (e: any) {
+      console.log(e);
+      toast.error(''+formatErrorMessages(e.message))
+    }
+  }
+
   async function mintNFT() {
+    toast('Minting...',{icon:'⚠️',duration:2000})
     console.log("minting...", currentSelectedStatue);
     if (currentSelectedStatue === -1) {
-      alert("Please select a statue");
+      toast.error("Please select a statue");
       return;
     }
     setLoading(true);
@@ -52,17 +102,17 @@ export default function MintDrawer() {
         client,
         writeContractAsync,
         (3 - currentSelectedStatue).toString(),
-        NFTPrices[currentSelectedStatue.toString()],
-        false
+        Price ? Price.toString() : "",
+        isApe
       );
       if (res === "success") {
-        alert("Minting successful");
+        toast.success("Minting successful");
       } else {
-        alert("Minting failed");
+        toast.error("Minting failed!");
       }
     } catch (e: any) {
       console.log(e);
-      alert("Minting failed: " + formatErrorMessages(e.message));
+      toast.error(''+formatErrorMessages(e.message))
     }
     setLoading(false);
   }
@@ -237,7 +287,7 @@ export default function MintDrawer() {
                 onClick={() => {
                   setTitle(statue.title);
                   setHeight(statue.height);
-                  setPrice(statue.price);
+                  setPrice(Number(Price) || 0);
                   setMaterial(statue.material);
                   setWeight(statue.weight);
                   setCurrentSelectedStatue(index);
@@ -260,13 +310,14 @@ export default function MintDrawer() {
           <div className="w-full flex items-center justify-center px-6 mt-[30px] mb-[20px]">
             {/* <button className="md:w-[52px] w-[30px] md:h-[52px] h-[30px] bg-[url(/static/images/mint-popup-arrow.png)] bg-center bg-no-repeat bg-cover hover:scale-105 transition-transform duration-300 ease-out"></button> */}
             <div className="flex flex-col items-center justify-center gap-2">
-              {!title && !price ? (
+              {!title && !Price ? (
                 <>
                   <span className="block text-white text-2xl lg:text-4xl font-medium tracking-tighter">
                     Please select statue
                   </span>
                   <span className="block invisible text-white opacity-[.4] text-lg lg:text-xl font-normal tracking-tighter text-center">
-                    {price} ETH Price
+                    {formatEther(Price ? Price : 0)} {isApe ? "APE" : "ETH"}{" "}
+                    Price
                   </span>
                 </>
               ) : (
@@ -275,14 +326,29 @@ export default function MintDrawer() {
                     {title}
                   </span>
                   <span className="block text-white opacity-[.4] text-lg lg:text-xl font-normal tracking-tighter text-center">
-                    {price} ETH
+                    {formatEther(Price ? Price : 0)} {isApe ? "APE" : "ETH"}
                   </span>
                 </>
               )}
             </div>
             {/* <button className="md:w-[52px] w-[30px] md:h-[52px] h-[30px] bg-[url(/static/images/mint-popup-arrow.png)] bg-center bg-no-repeat bg-cover transform rotate-180 hover:scale-105 transition-transform duration-300 ease-out"></button> */}
           </div>
-
+          <div className="py-16 absolute lg:left-10 bottom-20 left-5 font-medium tracking-tighter lg:bottom-0 text-center">
+            <Switch
+              checked={isApe}
+              onChange={setIsApe}
+              className={`${isApe ? "bg-[#ff3600]" : "bg-red-400"}
+          relative inline-flex h-[28px] w-[64px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75`}
+            >
+              <span className="sr-only white">Use APE</span>
+              <span
+                aria-hidden="true"
+                className={`${isApe ? "translate-x-9 bg-gray-100" : "translate-x-0 bg-gray-900"}
+            pointer-events-none inline-block h-[24px] w-[24px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out`}
+              />
+            </Switch>
+            <h6 className="text-white mt-2 text-sm">Use APE</h6>
+          </div>
           <button
             onClick={() => {
               // setLoading(true);
@@ -300,7 +366,9 @@ export default function MintDrawer() {
               //   console.log("Error:", error);
               // }
               // setLoading(false);
-              mintNFT();
+              if (isApe && (allowance ? allowance : 0) < (Price ? Price : 0)) {
+                approve();
+              } else mintNFT();
             }}
             disabled={loading}
             className="w-[80%] mt-6 lg:w-fit group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center gap-2 text-black font-medium text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full lg:px-10 py-2 disabled:bg-opacity-40 disabled:cursor-not-allowed"
@@ -327,7 +395,17 @@ export default function MintDrawer() {
               </div>
             ) : (
               <>
-                <span>{fromBuyNow ? "Buy Now" : "Mint"}</span>
+                <span>
+                  {isApe
+                    ? (allowance ? allowance : 0) >= (Price ? Price : 0)
+                      ? fromBuyNow
+                        ? "Buy Now"
+                        : "Mint"
+                      : "Approve"
+                    : fromBuyNow
+                    ? "Buy Now"
+                    : "Mint"}
+                </span>
                 <span className="block w-3 group-hover:translate-x-1 transition-transform duration-300 ease-out">
                   <svg
                     width="100%"

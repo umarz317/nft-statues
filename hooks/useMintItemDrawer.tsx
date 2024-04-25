@@ -35,6 +35,8 @@ type ContextType = {
   setStatuesValue: (statues: StatueType[]) => void;
   currentSelectedStatue: number;
   setCurrentSelectedStatue: (number: number) => void;
+  isApe: boolean;
+  setIsApe: (bool: boolean) => void;
   selectedNFT: any;
   setSelectedNFT: any;
   isOpenSelectNFT: boolean;
@@ -70,6 +72,8 @@ export const MintItemDrawerContext = createContext<ContextType>({
   setSelectedNFT: (selectedNFT: any) => {},
   isOpenSelectNFT: false,
   setOpenSelectNFT: (open: boolean) => {},
+  isApe: false,
+  setIsApe: (bool: boolean) => {},
 });
 
 export function useMintItemDrawer() {
@@ -96,6 +100,7 @@ export default function MintItemDrawerProvider({
   const [isOpenSelectNFT, setOpenSelectNFT] = useState(false);
   const [currentSelectedStatue, setCurrentSelectedStatue] =
     useState<number>(-1);
+  const [isApe, setIsApe] = useState(false);
 
   return (
     <MintItemDrawerContext.Provider
@@ -128,6 +133,8 @@ export default function MintItemDrawerProvider({
         setSelectedNFT,
         isOpenSelectNFT,
         setOpenSelectNFT,
+        isApe,
+        setIsApe,
       }}
     >
       {children}

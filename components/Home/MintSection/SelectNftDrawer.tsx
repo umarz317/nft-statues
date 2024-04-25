@@ -186,7 +186,7 @@ export default function SelectNftDrawer() {
             className="w-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-items-center gap-12 h-screen overflow-y-scroll px-10 xl:px-48"
           >
             {statuesValue.map((statue) => (
-              <button
+              <div
                 key={statue._id}
                 onClick={() => {
                   setSelectedNFT(statue);
@@ -232,7 +232,7 @@ export default function SelectNftDrawer() {
                     </button>
                   </div>
                 </div>
-              </button>
+              </div>
             ))}
           </div>
         </div>

@@ -50,9 +50,9 @@ function MintItem({
           <p className="text-[#A0A0A0] text-xl">{height} Meters Height</p>
         </div>
         <div className="order-4 lg:order-2 w-full flex flex-col lg:flex-row items-center justify-between gap-3 lg:gap-0 mt-4 lg:mt-0 relative z-10">
-          <span className="block text-white font-semibold text-xl">
+          {/* <span className="block text-white font-semibold text-xl">
             {price} ETH
-          </span>
+          </span> */}
           <div className="flex flex-col lg:flex-row items-center gap-3 select-none w-full lg:w-fit">
             <button
               onClick={() => {
@@ -116,10 +116,6 @@ function MintItem({
           src={imageSRC}
           width={1200}
           height={1200}
-          // style={{
-          //   WebkitMaskImage:
-          //     "linear-gradient(to bottom, black 0%, black 10%, transparent 100%)",
-          // }}
           className="order-3 mt-6 lg:mt-0 w-full z-0 h-full lg:absolute left-1/2 lg:-translate-x-1/2 bottom-0 object-contain rounded-xl lg:rounded-3xl"
           alt={title + "Statue"}
         />

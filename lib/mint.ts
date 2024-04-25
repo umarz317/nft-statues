@@ -1,6 +1,6 @@
-import { ethers, parseEther } from "ethers";
+import { parseEther } from "ethers";
 import { BASC_CONTRACT } from "./constants";
-
+import toast from "react-hot-toast";
 
 export async function mint(publicClient:any,writeContractAsync: any, tokenID: string, price: string, useAPE: boolean) {
   var hash = await writeContractAsync({
@@ -774,7 +774,6 @@ export async function mint(publicClient:any,writeContractAsync: any, tokenID: st
       },
     ],
     functionName: "mint",
-    //adding for template code only arguments are tokenID, price, useAPE
     args: [tokenID, parseEther(price), useAPE],
     value: !useAPE?parseEther(price):0,
   });
@@ -784,12 +783,14 @@ export async function mint(publicClient:any,writeContractAsync: any, tokenID: st
 
 export function formatErrorMessages(error: string) {
   if(error.includes('User')){
-    return 'User denied transaction';
+    return 'User denied transaction.';
   }
-  console.log(error.split(':')[0])
+  if(error.includes('Connector')){
+    return 'Wallet not connected.';
+  }
   var message = error.split(':')[0].split('Contract Call:')[0].trim()
   if(message.includes('balance')){
-    return 'Insufficient balance';
+    return 'Insufficient balance.';
   }
   else{
     return

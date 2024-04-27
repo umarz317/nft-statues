@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { useLenis } from "@studio-freight/react-lenis";
 import { urlFor } from "@/lib/sanity/sanityClient";
+import { useWalletContext } from "@/contexts/wallet";
 
 export default function SelectNftDrawer() {
   const {
@@ -16,6 +17,8 @@ export default function SelectNftDrawer() {
     selectedNFT,
     setSelectedNFT,
   } = useMintItemDrawer();
+  const { nfts } = useWalletContext();
+
   const lenis = useLenis(() => {});
 
   useEffect(() => {
@@ -180,61 +183,87 @@ export default function SelectNftDrawer() {
               />
             </svg>
           </button> */}
-
-          <div
-            data-lenis-prevent
-            className="w-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-items-center gap-12 h-screen overflow-y-scroll px-10 xl:px-48"
-          >
-            {statuesValue.map((statue) => (
-              <div
-                key={statue._id}
+          {nfts && nfts.length > 0 ? (
+            <div
+              data-lenis-prevent
+              className="w-screen grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 items-center justify-items-center gap-12 h-screen overflow-y-scroll px-10 xl:px-48"
+            >
+              {nfts.map((nft) => (
+                <div
+                  key={nft.identifier}
+                  onClick={() => {
+                    setSelectedNFT(nft);
+                    setOpenSelectNFT(false);
+                    // setOpenMintForm(true);
+                  }}
+                  className={`flex flex-col justify-between items-center rounded-[35px] overflow-hidden max-w-[437.3px] w-full h-[525px] ${
+                    selectedNFT?.identifier === nft.identifier
+                      ? "opacity-100"
+                      : "opacity-65"
+                  } duration-300`}
+                >
+                  {nft.image_url?.endsWith(".mp4") ? (
+                    <video
+                      src={nft.image_url ?? ""}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-[358.6px]"
+                    />
+                  ) : (
+                    <Image
+                      src={nft.image_url ?? ""}
+                      width={437.3}
+                      height={358.6}
+                      alt={nft.name ?? ""}
+                      className="w-full h-[358.6px]"
+                    />
+                  )}
+                  <div className="w-full h-[166.4px] bg-[#191919] shrink-0 flex items-center justify-between">
+                    <div className="flex flex-col gap-2 pl-4 sm:pl-10 max-w-[60%] overflow-hidden">
+                      <span className="block text-white text-2xl lg:text-4xl font-medium tracking-tighter text-left max-w-[80%] whitespace-nowrap text-ellipsis overflow-hidden">
+                        {nft.name}
+                      </span>
+                      <span className="block text-white opacity-[.4] text-lg lg:text-xl font-normal tracking-tighter text-left max-w-[80%] whitespace-nowrap text-ellipsis overflow-hidden">
+                        {nft.collection}
+                      </span>
+                    </div>
+                    <div className="pr-4 sm:pr-[24px]">
+                      <button
+                        onClick={() => {
+                          setSelectedNFT(nft);
+                          setOpenSelectNFT(false);
+                          // setOpenMintForm(true);
+                        }}
+                        className={`w-[100px] sm:w-[151.8px] mt-6 group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center text-black text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full py-2 font-black shrink-0 ${
+                          selectedNFT?.identifier === nft.identifier
+                            ? "[box-shadow:_0_0_50px_0_rgba(255,_54,_0,_0.52)]"
+                            : "[box-shadow:transparent]"
+                        }`}
+                      >
+                        {selectedNFT?.identifier === nft.identifier
+                          ? "Selected"
+                          : "Select"}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col h-full text-white items-center justify-center">
+              <h3 className="text-2xl">There are no NFTs to display</h3>
+              <button
                 onClick={() => {
-                  setSelectedNFT(statue);
                   setOpenSelectNFT(false);
-                  setOpenMintForm(true);
                 }}
-                className={`flex flex-col justify-between items-center rounded-[35px] overflow-hidden max-w-[437.3px] w-full h-[525px] ${
-                  selectedNFT?._id === statue._id ? "opacity-100" : "opacity-65"
-                } duration-300`}
+                className="w-[100px] sm:w-[151.8px] mt-6 group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center text-black text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full py-2 font-black shrink-0"
               >
-                <div className="w-full h-full overflow-hidden">
-                  <Image
-                    src={urlFor(statue.image).url()}
-                    width={437.3}
-                    height={358.6}
-                    alt={statue.title}
-                    className="w-full h-[358.6px]"
-                  />
-                </div>
-                <div className="w-full h-[166.4px] bg-[#191919] shrink-0 flex items-center justify-between">
-                  <div className="flex flex-col gap-2 pl-4 sm:pl-10">
-                    <span className="block text-white text-2xl lg:text-4xl font-medium tracking-tighter text-left">
-                      {statue.title}
-                    </span>
-                    <span className="block text-white opacity-[.4] text-lg lg:text-xl font-normal tracking-tighter text-left">
-                      {statue.price} ETH
-                    </span>
-                  </div>
-                  <div className="pr-4 sm:pr-[24px]">
-                    <button
-                      onClick={() => {
-                        setSelectedNFT(statue);
-                        setOpenSelectNFT(false);
-                        setOpenMintForm(true);
-                      }}
-                      className={`w-[100px] sm:w-[151.8px] mt-6 group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center text-black text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full py-2 font-black shrink-0  ${
-                        selectedNFT?._id === statue._id
-                          ? "[box-shadow:_0_0_50px_0_rgba(255,_54,_0,_0.52)]"
-                          : "[box-shadow:transparent]"
-                      }`}
-                    >
-                      {selectedNFT?._id === statue._id ? "Selected" : "Select"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                Close
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

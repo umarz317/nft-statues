@@ -190,14 +190,14 @@ export default function SelectNftDrawer() {
             >
               {nfts.map((nft) => (
                 <div
-                  key={nft.image_url}
+                  key={nft.identifier}
                   onClick={() => {
                     setSelectedNFT(nft);
                     setOpenSelectNFT(false);
-                    setOpenMintForm(true);
+                    // setOpenMintForm(true);
                   }}
                   className={`flex flex-col justify-between items-center rounded-[35px] overflow-hidden max-w-[437.3px] w-full h-[525px] ${
-                    selectedNFT?.image_url === nft.image_url
+                    selectedNFT?.identifier === nft.identifier
                       ? "opacity-100"
                       : "opacity-65"
                   } duration-300`}
@@ -237,12 +237,12 @@ export default function SelectNftDrawer() {
                           // setOpenMintForm(true);
                         }}
                         className={`w-[100px] sm:w-[151.8px] mt-6 group hover:scale-105 transition-transform duration-300 ease-out flex flex-row items-center justify-center text-black text-base lg:text-xl tracking-tighter bg-[#ff3600] rounded-full py-2 font-black shrink-0 ${
-                          selectedNFT?.image_url === nft.image_url
+                          selectedNFT?.identifier === nft.identifier
                             ? "[box-shadow:_0_0_50px_0_rgba(255,_54,_0,_0.52)]"
                             : "[box-shadow:transparent]"
                         }`}
                       >
-                        {selectedNFT?.image_url === nft.image_url
+                        {selectedNFT?.identifier === nft.identifier
                           ? "Selected"
                           : "Select"}
                       </button>

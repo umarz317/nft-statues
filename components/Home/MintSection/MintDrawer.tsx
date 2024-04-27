@@ -371,7 +371,7 @@ export default function MintDrawer() {
             <h6 className="text-white mt-2 text-sm">Use APE</h6>
           </div>
           <button
-            onClick={async () => {
+            onClick={() => {
               // setLoading(true);
               // try {
               //   await new Promise<void>((resolve) => {

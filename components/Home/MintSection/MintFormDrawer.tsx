@@ -26,7 +26,7 @@ const InputsData = [
 export default function MintFormDrawer() {
   const { statuesValue, selectedNFT, isOpenMintForm, setOpenMintForm } =
     useMintItemDrawer();
-  console.log("statuesValue:", statuesValue[0]);
+  console.log("selectedNFT:", selectedNFT);
   const lenis = useLenis(() => {});
 
   const { register, handleSubmit, reset } = useForm();
@@ -367,12 +367,12 @@ export default function MintFormDrawer() {
                   />
                 </svg>
               </div>
-              {selectedNFT?.image ? (
+              {selectedNFT?.image_url ? (
                 <Image
-                  src={urlFor(selectedNFT.image).url()}
+                  src={selectedNFT?.image_url}
                   width={437.3}
                   height={358.6}
-                  alt={selectedNFT?.title || ""}
+                  alt={selectedNFT?.name || ""}
                   className="w-full h-full rounded-[40px]"
                 />
               ) : null}

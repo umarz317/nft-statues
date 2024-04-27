@@ -51,7 +51,9 @@ export default function MintDrawer() {
   const client = usePublicClient();
 
   const { data: Price } = useReadContract({
-    address: !fromBuyNow?`0x${BASC_CONTRACT.address}`:`0x${BLAB_CONTRACT.address}`,
+    address: !fromBuyNow
+      ? `0x${BASC_CONTRACT.address}`
+      : `0x${BLAB_CONTRACT.address}`,
     abi: BASC_CONTRACT.abi,
     functionName: isApe ? "pricesAPE" : "pricesETH",
     args: [BigInt(3 - currentSelectedStatue)],
@@ -61,36 +63,49 @@ export default function MintDrawer() {
     address: `0x${APE_CONTRACT}`,
     abi: erc20Abi,
     functionName: "allowance",
-    args: [`0x${!fromBuyNow?`${BASC_CONTRACT.address}`:`${BLAB_CONTRACT.address}`}`, address ? address : `0x0`],
+    args: [
+      `0x${
+        !fromBuyNow ? `${BASC_CONTRACT.address}` : `${BLAB_CONTRACT.address}`
+      }`,
+      address ? address : `0x0`,
+    ],
   });
 
   async function approve() {
-    toast('Approving...',{icon:'⚠️',duration:2000})
+    toast("Approving...", { icon: "⚠️", duration: 2000 });
+    setLoading(true);
     try {
       const tx = await writeContractAsync({
         address: `0x${APE_CONTRACT}`,
         abi: erc20Abi,
         functionName: "approve",
         args: [
-          `0x${!fromBuyNow?`${BASC_CONTRACT.address}`:`${BLAB_CONTRACT.address}`}`,
+          `0x${
+            !fromBuyNow
+              ? `${BASC_CONTRACT.address}`
+              : `${BLAB_CONTRACT.address}`
+          }`,
           parseEther(Price ? Price.toString() : "0"),
         ],
       });
       var res = client?.waitForTransactionReceipt({ hash: tx });
       if ((await res)?.status === "success") {
-        toast.success('Approval Successful!')
+        toast.success("Approval Successful!");
+        setOpenMint(false);
+        setOpenSelectNFT(true);
       } else {
-        toast.error('Approval Failed!')
+        toast.error("Approval Failed!");
       }
       refetch();
     } catch (e: any) {
       console.log(e);
-      toast.error(''+formatErrorMessages(e.message))
+      toast.error("" + formatErrorMessages(e.message));
     }
+    setLoading(false);
   }
 
   async function mintNFT() {
-    toast('Minting...',{icon:'⚠️',duration:2000})
+    toast("Minting...", { icon: "⚠️", duration: 2000 });
     console.log("minting...", currentSelectedStatue);
     if (currentSelectedStatue === -1) {
       toast.error("Please select a statue");
@@ -107,12 +122,14 @@ export default function MintDrawer() {
       );
       if (res === "success") {
         toast.success("Minting successful");
+        setOpenMint(false);
+        setOpenSelectNFT(true);
       } else {
         toast.error("Minting failed!");
       }
     } catch (e: any) {
       console.log(e);
-      toast.error(''+formatErrorMessages(e.message))
+      toast.error("" + formatErrorMessages(e.message));
     }
     setLoading(false);
   }
@@ -343,14 +360,18 @@ export default function MintDrawer() {
               <span className="sr-only white">Use APE</span>
               <span
                 aria-hidden="true"
-                className={`${isApe ? "translate-x-9 bg-gray-100" : "translate-x-0 bg-gray-900"}
+                className={`${
+                  isApe
+                    ? "translate-x-9 bg-gray-100"
+                    : "translate-x-0 bg-gray-900"
+                }
             pointer-events-none inline-block h-[24px] w-[24px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out`}
               />
             </Switch>
             <h6 className="text-white mt-2 text-sm">Use APE</h6>
           </div>
           <button
-            onClick={() => {
+            onClick={async () => {
               // setLoading(true);
               // try {
               //   await new Promise<void>((resolve) => {

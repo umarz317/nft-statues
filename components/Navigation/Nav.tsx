@@ -38,7 +38,7 @@ export default function Nav() {
             className="w-24 lg:w-32"
           />
         </Link>
-        <nav className="absolute left-1/2 -translate-x-1/2 hidden lg:flex flex-row items-center gap-16">
+        <nav className="absolute left-1/2 -translate-x-1/2 hidden lg:flex flex-row items-center max-w-[1200px]:gap-16 gap-10">
           <NavItem href="#nft" text="NFT" />
           <NavItem href="#utility" text="Utility" />
           <NavItem href="#buy" text="Buy" />

@@ -22,6 +22,7 @@ export const Web3Context = ({ children }) => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider
+          showRecentTransactions
           theme={darkTheme()}
           modalSize="compact"
           initialChain={mainnet}

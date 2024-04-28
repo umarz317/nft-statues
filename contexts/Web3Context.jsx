@@ -1,20 +1,15 @@
-import '@rainbow-me/rainbowkit/styles.css';
+import "@rainbow-me/rainbowkit/styles.css";
 import {
   darkTheme,
   getDefaultConfig,
   RainbowKitProvider,
-} from '@rainbow-me/rainbowkit';
-import { http, WagmiProvider } from 'wagmi';
-import {
-  mainnet,
-} from 'wagmi/chains';
-import {
-  QueryClientProvider,
-  QueryClient,
-} from "@tanstack/react-query";
+} from "@rainbow-me/rainbowkit";
+import { WagmiProvider } from "wagmi";
+import { mainnet } from "wagmi/chains";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 const config = getDefaultConfig({
-  appName: 'BASC Labs',
+  appName: "BASC Labs",
   projectId: process.env.NEXT_PUBLIC_WC_ID,
   chains: [mainnet],
   ssr: true, // If your dApp uses server side rendering (SSR)
@@ -22,11 +17,15 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
-export const Web3Context = ({children}) => {
+export const Web3Context = ({ children }) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={darkTheme()} modalSize='compact' initialChain={mainnet}>
+        <RainbowKitProvider
+          theme={darkTheme()}
+          modalSize="compact"
+          initialChain={mainnet}
+        >
           {children}
         </RainbowKitProvider>
       </QueryClientProvider>

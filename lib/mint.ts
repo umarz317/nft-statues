@@ -1,6 +1,5 @@
 import { parseEther } from "ethers";
 import { BASC_CONTRACT } from "./constants";
-import toast from "react-hot-toast";
 
 export async function mint(publicClient:any,writeContractAsync: any, tokenID: string, price: string, useAPE: boolean) {
   var hash = await writeContractAsync({
